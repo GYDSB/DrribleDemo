@@ -1,0 +1,57 @@
+<!--首页显示-->
+
+<md-card ng-repeat="shot in shots" class="shots-list">
+    <md-card-header ng-click="goUser(shot['user'].id)">
+        <md-card-avatar class="user-avatar">
+            <img ng-src="{{shot['user'].avatar_url}}" alt="user">
+        </md-card-avatar>
+        <md-card-header-text>
+            <!--<span class="md-title"></span>-->
+            <span class="md-subhead">{{shot['user'].name}}</span>
+        </md-card-header-text>
+    </md-card-header>
+
+    <img ng-src="{{shot.images['teaser']}}" alt="shot" class="md-card-image" ng-click="goShot(shot['id'])">
+    <md-card-action layout="row" layout-align="space-between center">
+        <div layout="row">
+            <!--rebounds-url-->
+            <md-button md-no-ink="true" ng-show="shot['rebounds_count']">
+                <md-icon class="material-icons rebound-btnIcon" aria-label="rebound">
+                    reply
+                </md-icon>
+            </md-button>
+            <!--attachments-url-->
+            <md-button md-no-ink="true" ng-show="shot['attachments_count']">
+                <md-icon class="material-icons attach-btnIcon" aria-label="attach">
+                    attach_file
+                </md-icon>
+            </md-button>
+        </div>
+        <div>
+            <md-button ng-disabled="true">
+                <md-icon class="material-icons"
+                         aria-label="view">
+                    remove_red_eye
+                </md-icon>
+                {{shot['views_count']}}
+            </md-button>
+            <md-button ng-disabled="true">
+                <md-icon class="material-icons"
+                         aria-label="comment">
+                    comment
+                </md-icon>
+                {{shot['comments_count']}}
+            </md-button>
+            <md-button ng-click="favorite(shot)" md-no-ink="true">
+                <md-icon class="material-icons" ng-class="{'shot-like':isLike(shot.id)}"
+                         aria-label="favorite">
+                    favorite
+                </md-icon>
+                {{shot['likes_count']}}
+            </md-button>
+        </div>
+    </md-card-action>
+</md-card>
+<!--</section>-->
+
+<!--</md-content>-->

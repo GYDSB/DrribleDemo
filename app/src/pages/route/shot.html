@@ -1,0 +1,58 @@
+<md-card flex layout-fill="" class="card-shot">
+    <md-card-header>
+        <md-card-avatar>
+            <img ng-src="{{shot['user'].avatar_url}}" alt="user">
+        </md-card-avatar>
+        <md-card-header-text>
+            <span class="md-title">{{shot['title']}}</span>
+            <span class="md-subhead">by
+                <a href="">{{shot['user'].name}}</a> on {{createTime(shot['created_at'])}}</span>
+        </md-card-header-text>
+    </md-card-header>
+    <img ng-src="{{shot.images['teaser']}}" alt="shot" class="md-card-image">
+
+    <md-card-actions layout="row">
+
+        <md-button flex="">
+            <md-icon class="material-icons rebound-btnIcon" aria-label="rebound">
+                reply
+            </md-icon>
+        </md-button>
+
+        <md-button flex="">
+            <md-icon class="material-icons" aria-label="favorite">
+                favorite
+            </md-icon>
+            <span>{{shot['likes_count']}}</span>
+        </md-button>
+            <md-button flex="" ng-disabled="true">
+                <md-icon class="material-icons"
+                         aria-label="view">
+                    remove_red_eye
+                </md-icon>
+                <span>{{shot['views_count']}}</span>
+            </md-button>
+            <md-button flex="" ng-disabled="true">
+                <md-icon class="material-icons"
+                         aria-label="comment">
+                    comment
+                </md-icon>
+                <span>{{shot['buckets_count']}}</span>
+            </md-button>
+    </md-card-actions>
+
+    <md-card-content    class="shot-content">
+        <div ng-bind-html="shot['description']" class="shot-description">
+
+        </div>
+        <div class="shot-tags">
+            <h3>Tags</h3>
+            <div layout-wrap="" layout="row">
+                <span ng-repeat="tag in shot['tags']" layout-margin>
+                    {{tag}}
+                </span>
+            </div>
+        </div>
+    </md-card-content>
+
+</md-card>

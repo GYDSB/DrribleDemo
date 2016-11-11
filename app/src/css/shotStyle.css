@@ -1,0 +1,36 @@
+md-card.card-shot md-card-header img{
+    border-radius: 50%;
+}
+md-card.card-shot md-card-header md-card-header-text .md-title{
+    font-size: 16px;
+}
+md-card.card-shot a{
+    text-decoration: none;
+    color: #3a8bbb;
+}
+md-card.card-shot md-card-actions{
+    border-bottom: 1px solid #ddd;
+    margin: 8px 0;
+}
+md-card.card-shot md-card-content {
+    font-size: 1.6rem;
+    padding: 0px 16px;
+    color: #555555;
+    /*padding-top: 0;*/
+
+}
+.shot-content .shot-description{
+    border-bottom: 1px solid #ddd;
+}
+.shot-content .shot-tags span{
+    color: #555555;
+    font-style: italic;
+}
+.md-button md-icon.rebound-btnIcon{
+    color: #7bbb5e;
+
+}
+.shot-content p{
+    margin-bottom: 10px;
+    line-height: 24px;
+}

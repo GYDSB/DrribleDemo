@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="css/angular-material.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/material-design-icons/3.0.0/iconfont/material-icons.css">
+    <!--<link rel="stylesheet" href="css/me-pageloading.min.css">-->
+    <link rel="stylesheet" href="css/shotStyle.css">
+    <style>
+
+        html {
+            font-size: 10px;
+        }
+        body{
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        md-toolbar {
+            box-shadow: 0 1px 8px -1px black;
+        }
+
+        .drrible-toolbar > .md-button {
+            width: 48px;
+            min-width: 0;
+        }
+
+        .shot-like {
+            color: #ff5da2;
+        }
+        .md-button md-icon.attach-btnIcon{
+            transform: rotate3d(0,0,1,30deg);
+        }
+
+    </style>
+</head>
+<body ng-app="myApp">
+<div layout="row" ng-controller="myController" layout-fill="">
+
+    <md-sidenav md-component-id="sideLeft" md-is-locked-open="$mdMedia('gt-sm')"
+                class="md-sidenav-left drrible-side" style="background-color: #2ac845;"
+                layout="column" md-swipe-left="openLeftMenu()" flex>
+        <md-content>
+
+        </md-content>
+    </md-sidenav>
+    <div layout="column" flex md-swipe-right="openLeftMenu()" layout-fill="">
+        <md-toolbar layout="column" layout-align="start center">
+            <div class="md-toolbar-tools drrible-toolbar" layout="row" layout-fill="" flex>
+                <md-button hide-gt-sm>
+                    <md-icon class="md-icon-button" md-svg-src="images/menu.svg"
+                             aria-label="Menu">
+                    </md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-content ui-view="">
+
+        </md-content>
+    </div>
+</div>
+
+
+<!--路由跳转-->
+
+<!-- Angular Material Library -->
+<script src="js/angular.min.js"></script>
+<script src="js/angular-aria.min.js"></script>
+<script src="js/angular-animate.min.js"></script>
+<script src="js/angular-ui-router.min.js"></script>
+<script src="js/angular-material.min.js"></script>
+<script src="js/angular-messages.min.js"></script>
+<script src="js/angular-sanitize.min.js"></script>
+
+<script src="js/app.js"></script>
+<script src="js/controller/indexCtrl.js"></script>
+<script src="js/service/ShotsService.js"></script>
+
+
+</body>
+</html>
