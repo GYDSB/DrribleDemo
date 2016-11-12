@@ -42,8 +42,8 @@
                 </md-icon>
                 {{shot['comments_count']}}
             </md-button>
-            <md-button ng-click="favorite(shot)" md-no-ink="true">
-                <md-icon class="material-icons" ng-class="{'shot-like':isLike(shot.id)}"
+            <md-button md-no-ink="true" ng-click="toggleLike(shot)">
+                <md-icon class="material-icons" ng-class="{'shot-like':isFavorite(shot.id)}"
                          aria-label="favorite">
                     favorite
                 </md-icon>

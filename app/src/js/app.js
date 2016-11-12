@@ -15,58 +15,38 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages","ngSanitize"])
                     url: "/shots",
                     templateUrl: "pages/route/shots.html",
                     resolve: {
+                        //页面加载前获取数据
                         shotsData: ["ShotsService", function (ShotsService) {
                             return ShotsService.getShots();
                         }],
-                        likedShots: ["LikedService", function (LikedService) {
-                            return LikedService.list_likes();
+                        //初始化likes列表
+                        likesInit:["LikedService",function (LikedService) {
+                            return LikedService.init();
+                        }],
+                        shotsInit:["LikedService","likesInit",function (LikedService,likesInit) {
+                            var likes=likesInit.data
+                            angular.forEach(likes,function (like) {
+                                LikedService.likesList.push(like.shot.id);
+                            })
                         }]
-
                     },
-                    controller: ["shotsData", "likedShots", "$scope","$state","LoadingService", "LikedService",
-                        function (shotsData, likedShots, $scope, $state,LoadingService, LikedService) {
+                    controller: ["shotsData","shotsInit", "$scope","$state","LoadingService", "LikedService",
+                        function (shotsData,shotsInit, $scope, $state,LoadingService, LikedService) {
                             var shots = shotsData.data;
-                            var userLikes = likedShots.data;
-
                             $scope.shots = shots;
 
-                            //like功能实现
-                            // 初始化likes列表数据,对用户likeshot标记
-                            angular.forEach(userLikes, function (like) {
-                                LikedService.likeShots.push(like["shot"].id)
-                            })
-
-                            //通过shotId判断用户是否like
-                            $scope.isLike = function (shotId) {
-                                if (LikedService.likeShots.indexOf(shotId) == -1)
-                                    return false;
-                                else return true;
+                            $scope.isFavorite=function (shotId) {
+                               return LikedService.isLikeShot(shotId);
                             }
-
-                            //用户like shot操作
-                            $scope.favorite = function (shot) {
-                                var flag = $scope.isLike(shot.id);
-                                if (flag) {
-                                    shot["likes_count"] -= 1;
-                                    var index = LikedService.likeShots.indexOf(shot.id);
-                                    LikedService.likeShots.splice(index, 1);
-                                    LikedService.unlike_AShot(shot.id).then(function (response) {
-                                        console.log("unlike operation");
-                                    }, function (err) {
-                                        console.log("err operation")
-                                    })
+                            $scope.toggleLike=function (shot) {
+                                if(LikedService.isLikeShot(shot.id)){
+                                    LikedService.removeLikeShot(shot.id);
+                                    shot["likes_count"]-=1;
                                 }
-                                else {
-                                    shot["likes_count"] += 1;
-                                    $scope.isLike(shot.id);
-                                    LikedService.likeShots.push(shot.id);
-                                    LikedService.like_AShot(shot.id).then(function () {
-                                        console.log("like operation");
-                                    }, function (err) {
-                                        console.log("err operation");
-                                    })
+                                else{
+                                    LikedService.addLikeShot(shot.id);
+                                    shot["likes_count"]+=1;
                                 }
-
                             }
                             //shot-page路由跳转处理
                             $scope.goShot=function (shotId) {

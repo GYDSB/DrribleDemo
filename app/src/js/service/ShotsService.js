@@ -3,28 +3,34 @@
  */
 //用于获取Drrible中shots信息
 angular.module("myApp")
-    .factory("ShotsService", ["$http", function ($http) {
+    .factory("Base",[function () {
+        return{
+            url:"https://api.dribbble.com/v1",
+            suffix:"?t="+new Date().getTime()
+        }
+    }])
+    .factory("ShotsService", ["Base","$http", function (Base,$http) {
         return {
             //获得默认格式的shots
             getShots: function () {
-                return $http.get("https://api.dribbble.com/v1/shots");
+                return $http.get(Base.url+"/shots"+Base.suffix);
             },
             //获得特定shot
             getAShot: function (shotId) {
-                return $http.get("https://api.dribbble.com/v1/shots/" + shotId)
+                return $http.get(Base.url+"/shots/" + shotId);
             }
         }
     }])
-    .factory("UserService", ["$http", function ($http) {
+    .factory("UserService", ["Base","$http", function (Base,$http) {
         //    获取用户信息
         return {
             //当前用户信息
             getMyself: function () {
-                return $http.get("https://api.dribbble.com/v1/user");
+                return $http.get(Base.url+"/user");
             },
             //其他用户信息
             getAUser: function (userId) {
-                return $http.get("https://api.dribbble.com/v1/users/" + userId);
+                return $http.get(Base.url+"/users/" + userId);
             }
         }
     }])
@@ -40,23 +46,42 @@ angular.module("myApp")
         }
     }])
     //判断已授权用户对shot的like属性
-    .factory("LikedService", ["$http", function ($http) {
-        return {
-            likeShots:new Array(),
-
-            isLike: function (shotId) {
-                return $http.get("https://api.dribbble.com/v1/shots/" + shotId + "/like");
+    .factory("LikedService", ["Base","$http", "$q",function (Base,$http,$q) {
+        // likesList (Array)
+        var service={
+            likesList:[],
+            init:function () {
+                return service.getLikeShots();
             },
-            like_AShot: function (shotId) {
-                return $http.post("https://api.dribbble.com/v1/shots/"+shotId+"/like",null);
+            getLikeShots:function () {
+                var deferred=$q.defer();
+                $http.get(Base.url+"/user/likes"+Base.suffix).then(function (success) {
+                    deferred.resolve(success);
+                },function (error) {
+                    deferred.reject(error);
+                })
+                return deferred.promise;
             },
-            unlike_AShot:function (shotId) {
-                return $http.delete("https://api.dribbble.com/v1/shots/"+shotId+"/like");
+            addLikeShot:function (shotId) {
+                service.likesList.push(shotId);
+                console.log("like")
+                return $http.post(Base.url+"/shots/"+shotId+"/like",null);
             },
-            list_likes:function () {
-                return $http.get("https://api.dribbble.com/v1/user/likes");
+            removeLikeShot:function (shotId) {
+                var index=service.likesList.indexOf(shotId);
+                service.likesList.splice(index,1);
+                console.log("unlike")
+                return $http.delete(Base.url+"/shots/"+shotId+"/like");
+            },
+            isLikeShot:function (shotId) {
+                if(service.likesList.indexOf(shotId)!=-1){
+                    return true;
+                }
+                else
+                    return false;
             }
         }
+        return service;
     }])
     .factory("FormatService", [function () {
         return {
