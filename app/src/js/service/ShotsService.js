@@ -43,6 +43,7 @@ angular.module("myApp")
     .factory("LikedService", ["$http", function ($http) {
         return {
             likeShots:new Array(),
+
             isLike: function (shotId) {
                 return $http.get("https://api.dribbble.com/v1/shots/" + shotId + "/like");
             },
@@ -82,7 +83,6 @@ angular.module("myApp")
                     return "1 minutes ago";
                 }
             }
-
         }
     }])
 

@@ -1,3 +1,9 @@
+md-card.card-shot{
+    background-color: #f4f4f4;
+}
+md-card.card-shot md-card-header{
+    padding: 16px 8px 20px 8px;
+}
 md-card.card-shot md-card-header img{
     border-radius: 50%;
 }
@@ -10,7 +16,7 @@ md-card.card-shot a{
 }
 md-card.card-shot md-card-actions{
     border-bottom: 1px solid #ddd;
-    margin: 8px 0;
+    padding-bottom: 8px;
 }
 md-card.card-shot md-card-content {
     font-size: 1.6rem;
