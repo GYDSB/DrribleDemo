@@ -6,7 +6,7 @@ angular.module("myApp")
     .factory("Base",[function () {
         return{
             url:"https://api.dribbble.com/v1",
-            suffix:"?t="+new Date().getTime()
+            suffix:"?t="+new Date().getTime(),
         }
     }])
     .factory("ShotsService", ["Base","$http", function (Base,$http) {
@@ -79,6 +79,16 @@ angular.module("myApp")
                 }
                 else
                     return false;
+            },
+            toggleLike:function (shot) {
+                if(service.isLikeShot(shot.id)){
+                    service.removeLikeShot(shot.id);
+                    shot["likes_count"]-=1;
+                }
+                else{
+                    service.addLikeShot(shot.id);
+                    shot["likes_count"]+=1;
+                }
             }
         }
         return service;

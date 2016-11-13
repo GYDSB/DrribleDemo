@@ -12,9 +12,12 @@
 
         html {
             font-size: 10px;
+            background-color: #989898;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
         body{
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
         }
 
         md-toolbar {
@@ -32,19 +35,21 @@
         .md-button md-icon.attach-btnIcon{
             transform: rotate3d(0,0,1,30deg);
         }
-
+        .dribble-btn-group .md-button{
+            font-size: 14px;
+        }
     </style>
 </head>
 <body ng-app="myApp">
 <div layout="row" ng-controller="myController" layout-fill="">
 
-    <md-sidenav md-component-id="sideLeft" md-is-locked-open="$mdMedia('gt-sm')"
-                class="md-sidenav-left drrible-side" style="background-color: #2ac845;"
-                layout="column" md-swipe-left="openLeftMenu()" flex>
-        <md-content>
+    <!--<md-sidenav md-component-id="sideLeft" md-is-locked-open="$mdMedia('gt-sm')"-->
+                <!--class="md-sidenav-left drrible-side" style="background-color: #2ac845;"-->
+                <!--layout="column" md-swipe-left="openLeftMenu()" flex>-->
+        <!--<md-content>-->
 
-        </md-content>
-    </md-sidenav>
+        <!--</md-content>-->
+    <!--</md-sidenav>-->
     <div layout="column" flex md-swipe-right="openLeftMenu()" layout-fill="">
         <md-toolbar layout="column" layout-align="start center">
             <div class="md-toolbar-tools drrible-toolbar" layout="row" layout-fill="" flex>

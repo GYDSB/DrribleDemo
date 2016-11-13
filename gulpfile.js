@@ -39,6 +39,11 @@ gulp.task("pages", function () {
         .pipe(browserSync.reload({
             stream: true
         }));
+    gulp.src('app/src/pages/route/*.html')
+        .pipe(gulp.dest('app/dist/pages/route'))
+        .pipe(browserSync.reload({
+            stream: true
+        }));
     gulp.src('app/src/*.html')
         .pipe(gulp.dest('app/dist'))
         .pipe(browserSync.reload({
@@ -55,7 +60,7 @@ gulp.task("sync", function () {
         }
     )
 })
-gulp.task("watcher", ['sync', 'scss', 'js'], function () {
+gulp.task("watcher", ['sync', 'scss', 'js','pages'], function () {
     gulp.watch("app/src/css/*.scss", ["scss"]);
     gulp.watch("app/src/**/*.html", ["pages"]);
     gulp.watch("app/src/js/*.js", ["js"]);

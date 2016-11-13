@@ -1,57 +1,74 @@
 <!--首页显示-->
+<md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-gt-sm="4" md-cols-md="5" md-cols-gt-md="5"
+              md-gutter="8px" md-gt-md="12px"
+              md-row-height="1:1">
+    <md-grid-tile ng-repeat="shot in shots">
+        <div layout="column">
+            <div layout="column" style="padding: 10px;background-color: white" ng-click="goShot(shot.id)">
+                <img ng-src="{{shot.images['teaser']}}" alt="shot" style="width: 100%;">
+            </div>
 
-<md-card ng-repeat="shot in shots" class="shots-list">
-    <md-card-header ng-click="goUser(shot['user'].id)">
-        <md-card-avatar class="user-avatar">
-            <img ng-src="{{shot['user'].avatar_url}}" alt="user">
-        </md-card-avatar>
-        <md-card-header-text>
-            <!--<span class="md-title"></span>-->
-            <span class="md-subhead">{{shot['user'].name}}</span>
-        </md-card-header-text>
-    </md-card-header>
+            <div layout="row" layout-align="start center" style="margin: 8px;" hide show-gt-sm>
+                <img ng-src="{{shot['user'].avatar_url}}" alt="user"
+                     style="width: 24px;height: 24px;border-radius: 50%">
+                <span>{{shot['user'].name}}</span>
+            </div>
+        </div>
 
-    <img ng-src="{{shot.images['teaser']}}" alt="shot" class="md-card-image" ng-click="goShot(shot['id'])">
-    <md-card-action layout="row" layout-align="space-between center">
-        <div layout="row">
-            <!--rebounds-url-->
-            <md-button md-no-ink="true" ng-show="shot['rebounds_count']">
-                <md-icon class="material-icons rebound-btnIcon" aria-label="rebound">
-                    reply
-                </md-icon>
-            </md-button>
-            <!--attachments-url-->
-            <md-button md-no-ink="true" ng-show="shot['attachments_count']">
-                <md-icon class="material-icons attach-btnIcon" aria-label="attach">
-                    attach_file
-                </md-icon>
-            </md-button>
-        </div>
-        <div>
-            <md-button ng-disabled="true">
-                <md-icon class="material-icons"
-                         aria-label="view">
-                    remove_red_eye
-                </md-icon>
-                {{shot['views_count']}}
-            </md-button>
-            <md-button ng-disabled="true">
-                <md-icon class="material-icons"
-                         aria-label="comment">
-                    comment
-                </md-icon>
-                {{shot['comments_count']}}
-            </md-button>
-            <md-button md-no-ink="true" ng-click="toggleLike(shot)">
-                <md-icon class="material-icons" ng-class="{'shot-like':isFavorite(shot.id)}"
-                         aria-label="favorite">
-                    favorite
-                </md-icon>
-                {{shot['likes_count']}}
-            </md-button>
-        </div>
-    </md-card-action>
-</md-card>
+    </md-grid-tile>
+</md-grid-list>
+<!--<md-card ng-repeat="shot in shots" class="shots-list">-->
+    <!--<md-card-header ng-click="goUser(shot['user'].id)">-->
+        <!--<md-card-avatar class="user-avatar">-->
+            <!--<img ng-src="{{shot['user'].avatar_url}}" alt="user">-->
+        <!--</md-card-avatar>-->
+        <!--<md-card-header-text>-->
+            <!--&lt;!&ndash;<span class="md-title"></span>&ndash;&gt;-->
+            <!--<span class="md-subhead">{{shot['user'].name}}</span>-->
+        <!--</md-card-header-text>-->
+    <!--</md-card-header>-->
+
+    <!--<img ng-src="{{shot.images['teaser']}}" alt="shot" class="md-card-image" ng-click="goShot(shot['id'])">-->
+    <!--<md-card-action layout="row" layout-align="space-between center">-->
+        <!--<div layout="row">-->
+            <!--&lt;!&ndash;rebounds-url&ndash;&gt;-->
+            <!--<md-button md-no-ink="true" ng-show="shot['rebounds_count']">-->
+                <!--<md-icon class="material-icons rebound-btnIcon" aria-label="rebound">-->
+                    <!--reply-->
+                <!--</md-icon>-->
+            <!--</md-button>-->
+            <!--&lt;!&ndash;attachments-url&ndash;&gt;-->
+            <!--<md-button md-no-ink="true" ng-show="shot['attachments_count']">-->
+                <!--<md-icon class="material-icons attach-btnIcon" aria-label="attach">-->
+                    <!--attach_file-->
+                <!--</md-icon>-->
+            <!--</md-button>-->
+        <!--</div>-->
+        <!--<div>-->
+            <!--<md-button ng-disabled="true">-->
+                <!--<md-icon class="material-icons"-->
+                         <!--aria-label="view">-->
+                    <!--remove_red_eye-->
+                <!--</md-icon>-->
+                <!--{{shot['views_count']}}-->
+            <!--</md-button>-->
+            <!--<md-button ng-disabled="true">-->
+                <!--<md-icon class="material-icons"-->
+                         <!--aria-label="comment">-->
+                    <!--comment-->
+                <!--</md-icon>-->
+                <!--{{shot['comments_count']}}-->
+            <!--</md-button>-->
+            <!--<md-button md-no-ink="true" ng-click="LikedService.toggleLike(shot)">-->
+                <!--<md-icon class="material-icons" ng-class="{'shot-like':LikedService.isLikeShot(shot.id)}"-->
+                         <!--aria-label="favorite">-->
+                    <!--favorite-->
+                <!--</md-icon>-->
+                <!--{{shot['likes_count']}}-->
+            <!--</md-button>-->
+        <!--</div>-->
+    <!--</md-card-action>-->
+<!--</md-card>-->
 <!--</section>-->
 
 <!--</md-content>-->

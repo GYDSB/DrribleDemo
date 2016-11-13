@@ -35,19 +35,6 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages","ngSanitize"])
                             var shots = shotsData.data;
                             $scope.shots = shots;
 
-                            $scope.isFavorite=function (shotId) {
-                               return LikedService.isLikeShot(shotId);
-                            }
-                            $scope.toggleLike=function (shot) {
-                                if(LikedService.isLikeShot(shot.id)){
-                                    LikedService.removeLikeShot(shot.id);
-                                    shot["likes_count"]-=1;
-                                }
-                                else{
-                                    LikedService.addLikeShot(shot.id);
-                                    shot["likes_count"]+=1;
-                                }
-                            }
                             //shot-page路由跳转处理
                             $scope.goShot=function (shotId) {
                                 $state.go('shotId',{"shotId":shotId});
