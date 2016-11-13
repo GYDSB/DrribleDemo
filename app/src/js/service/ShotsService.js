@@ -10,16 +10,26 @@ angular.module("myApp")
         }
     }])
     .factory("ShotsService", ["Base","$http", function (Base,$http) {
-        return {
+        var service={
             //获得默认格式的shots
+            params:{
+                "page":1,
+                "per_page":50,
+                "t":new Date().getTime()
+            },
             getShots: function () {
-                return $http.get(Base.url+"/shots"+Base.suffix);
+                return $http({
+                    method:'GET',
+                    url:Base.url+'/shots',
+                    params:service.params
+                });
             },
             //获得特定shot
             getAShot: function (shotId) {
                 return $http.get(Base.url+"/shots/" + shotId);
             }
         }
+        return service;
     }])
     .factory("UserService", ["Base","$http", function (Base,$http) {
         //    获取用户信息
@@ -84,10 +94,12 @@ angular.module("myApp")
                 if(service.isLikeShot(shot.id)){
                     service.removeLikeShot(shot.id);
                     shot["likes_count"]-=1;
+                    console.log('unlike');
                 }
                 else{
                     service.addLikeShot(shot.id);
                     shot["likes_count"]+=1;
+                    console.log('like');
                 }
             }
         }

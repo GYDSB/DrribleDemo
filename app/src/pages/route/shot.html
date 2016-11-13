@@ -12,37 +12,39 @@
     <img ng-src="{{shot.images['teaser']}}" alt="shot" class="md-card-image">
 
 
-    <md-card-actions layout="row">
+    <md-card-actions layout="row" layout-align="center center">
 
-        <md-button flex="">
+        <md-button flex="" class="md-icon-button">
             <md-icon class="material-icons rebound-btnIcon" aria-label="rebound">
                 reply
             </md-icon>
         </md-button>
 
-        <md-button flex="">
-            <md-icon class="material-icons" aria-label="favorite">
+        <md-button flex="" ng-click="toggleLike(shot)" md-no-ink="true">
+            <md-icon class="material-icons" aria-label="favorite"
+                     ng-class="{'shot-like':isLikeShot(shot.id)}">
                 favorite
             </md-icon>
             <span>{{shot['likes_count']}}</span>
         </md-button>
-            <md-button flex="" ng-disabled="true">
-                <md-icon class="material-icons"
-                         aria-label="view">
-                    remove_red_eye
-                </md-icon>
-                <span>{{shot['views_count']}}</span>
-            </md-button>
-            <md-button flex="" ng-disabled="true">
-                <md-icon class="material-icons"
-                         aria-label="comment">
-                    comment
-                </md-icon>
-                <span>{{shot['buckets_count']}}</span>
-            </md-button>
+
+        <md-button flex="" ng-disabled="true"  >
+            <md-icon class="material-icons"
+                     aria-label="view">
+                remove_red_eye
+            </md-icon>
+            <span>{{shot['views_count']}}</span>
+        </md-button>
+        <md-button flex="" ng-disabled="true"  >
+            <md-icon class="material-icons"
+                     aria-label="comment">
+                comment
+            </md-icon>
+            <span>{{shot['comments_count']}}</span>
+        </md-button>
     </md-card-actions>
 
-    <md-card-content    class="shot-content">
+    <md-card-content class="shot-content">
         <div ng-bind-html="shot['description']" class="shot-description">
 
         </div>

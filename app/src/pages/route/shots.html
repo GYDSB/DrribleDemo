@@ -1,17 +1,17 @@
 <!--首页显示-->
 <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-gt-sm="4" md-cols-md="5" md-cols-gt-md="5"
-              md-gutter="8px" md-gt-md="12px"
-              md-row-height="1:1">
+              md-gutter="8px" md-gutter-md="12px"
+              md-row-height="4:3" md-row-height-gt-sm="1:1" class="shots-list" id="scrollable" lazy-img-container="">
     <md-grid-tile ng-repeat="shot in shots">
         <div layout="column">
-            <div layout="column" style="padding: 10px;background-color: white" ng-click="goShot(shot.id)">
-                <img ng-src="{{shot.images['teaser']}}" alt="shot" style="width: 100%;">
+            <div layout="column" class="shot-teaser" style="" ng-click="goShot(shot.id)">
+                <img lazy-img="{{shot.images['teaser']}}" alt="shot">
             </div>
 
-            <div layout="row" layout-align="start center" style="margin: 8px;" hide show-gt-sm>
-                <img ng-src="{{shot['user'].avatar_url}}" alt="user"
-                     style="width: 24px;height: 24px;border-radius: 50%">
-                <span>{{shot['user'].name}}</span>
+            <div layout="row" class="shot-avatar" layout-align="start center" style="margin: 8px;" hide show-gt-sm>
+                <img lazy-img="{{shot['user'].avatar_url}}" alt="user"
+                     style="">
+                <span class="avatar-name">{{shot['user'].name}}</span>
             </div>
         </div>
 

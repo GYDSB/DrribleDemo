@@ -1,7 +1,7 @@
 /**
  * Created by guoyang on 2016/11/6.
  */
-angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages","ngSanitize"])
+angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages","ngSanitize","angularLazyImg"])
 
     .config(["$httpProvider", function ($httpProvider) {
         $httpProvider.defaults.headers.common["Authorization"] = "Bearer c55bc43fc394e09f2905217c300272db380f9c224aa2a223454af2256b6386fa";
@@ -58,16 +58,23 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages","ngSanitize"])
                     url: "/shots/:shotId",
                     templateUrl: "pages/route/shot.html",
                     resolve: {
-                        shot:["ShotsService","FormatService","$stateParams",function (ShotsService,FormatService,$stateParams) {
+                        shot:["ShotsService","FormatService","$stateParams",
+                            function (ShotsService,FormatService,$stateParams) {
                             return ShotsService.getAShot($stateParams.shotId);
                         }]
                     },
-                    controller: ["$scope", "$state","shot","FormatService",
-                        function ($scope, $state, shot,FormatService) {
+                    controller: ["$scope", "$state","shot","FormatService","LikedService",
+                        function ($scope, $state, shot,FormatService,LikedService) {
                             $scope.shot=shot.data;
                             $scope.createTime=function (time) {
                                 // console.log("time",FormatService.formatTime(time));
                                 return  FormatService.formatTime(time);
+                            }
+                            $scope.toggleLike=function (shot) {
+                                LikedService.toggleLike(shot);
+                            }
+                            $scope.isLikeShot=function (shotId) {
+                                return LikedService.isLikeShot(shotId);
                             }
                         }]
 
@@ -99,6 +106,21 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages","ngSanitize"])
                     controller: ""
                 })
         }])
+    .config(["lazyImgConfigProvider",function (lazyImgConfigProvider) {
+        var scrollable=document.querySelector("#scrollable")
+        lazyImgConfigProvider.setOptions({
+            offset:100,
+            errorClass:'error',
+            successClass:'success',
+            onError:function () {
+                // console.log("加载失败")
+            },
+            onSuccess:function () {
+                // console.log("加载成功");
+            },
+            container:angular.element(scrollable)
+        })
+    }])
 
 
 

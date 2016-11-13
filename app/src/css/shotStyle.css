@@ -1,3 +1,21 @@
+.shots-list .shot-teaser{
+    padding: 10px;
+    background-color: white
+}
+.shots-list .shot-teaser>img{
+    width: 100%;
+}
+.shots-list .shot-avatar{
+    margin: 8px;
+}
+.shots-list .shot-avatar>img{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+span.avatar-name{
+    margin: 0 8px;
+}
 md-card.card-shot{
     background-color: #f4f4f4;
 }
