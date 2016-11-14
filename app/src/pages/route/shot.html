@@ -1,6 +1,6 @@
 <md-card flex layout-fill="" class="card-shot">
     <md-card-header>
-        <md-card-avatar>
+        <md-card-avatar ng-click="goUser(shot['user'].id)" >
             <img ng-src="{{shot['user'].avatar_url}}" alt="user">
         </md-card-avatar>
         <md-card-header-text>

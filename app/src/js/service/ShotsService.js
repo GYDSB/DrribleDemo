@@ -14,7 +14,7 @@ angular.module("myApp")
             //获得默认格式的shots
             params:{
                 "page":1,
-                "per_page":50,
+                "per_page":30,
                 "t":new Date().getTime()
             },
             getShots: function () {

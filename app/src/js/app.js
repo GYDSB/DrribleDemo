@@ -70,11 +70,17 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages","ngSanitize","a
                                 // console.log("time",FormatService.formatTime(time));
                                 return  FormatService.formatTime(time);
                             }
+
                             $scope.toggleLike=function (shot) {
                                 LikedService.toggleLike(shot);
                             }
                             $scope.isLikeShot=function (shotId) {
                                 return LikedService.isLikeShot(shotId);
+                            }
+
+                            //路由跳转
+                            $scope.goUser=function (userId) {
+                                $state.go('users',{"userId":userId});
                             }
                         }]
 
@@ -96,7 +102,8 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages","ngSanitize","a
                         }]
                     },
                     controller: ["$scope","$state","author",function ($scope,$state,author) {
-
+                        $scope.user=author;
+                        console.log($scope.user);
                     }]
                 })
                 .state("login", {
@@ -116,7 +123,7 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages","ngSanitize","a
                 // console.log("加载失败")
             },
             onSuccess:function () {
-                // console.log("加载成功");
+                console.log("加载成功");
             },
             container:angular.element(scrollable)
         })

@@ -1,7 +1,7 @@
 <!--首页显示-->
 <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-gt-sm="4" md-cols-md="5" md-cols-gt-md="5"
-              md-gutter="8px" md-gutter-md="12px"
-              md-row-height="4:3" md-row-height-gt-sm="1:1" class="shots-list" id="scrollable" lazy-img-container="">
+              md-gutter="12px" md-gutter-md="12px"
+              md-row-height="4:3" md-row-height-gt-sm="1:1" class="shots-list" >
     <md-grid-tile ng-repeat="shot in shots">
         <div layout="column">
             <div layout="column" class="shot-teaser" style="" ng-click="goShot(shot.id)">

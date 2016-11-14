@@ -1,3 +1,6 @@
+md-grid-list{
+    background-color: #dddddd;;
+}
 .shots-list .shot-teaser{
     padding: 10px;
     background-color: white
@@ -17,7 +20,7 @@ span.avatar-name{
     margin: 0 8px;
 }
 md-card.card-shot{
-    background-color: #f4f4f4;
+    /*background-color:transparent;*/
 }
 md-card.card-shot md-card-header{
     padding: 16px 8px 20px 8px;
@@ -31,6 +34,9 @@ md-card.card-shot md-card-header md-card-header-text .md-title{
 md-card.card-shot a{
     text-decoration: none;
     color: #3a8bbb;
+}
+md-card.card-shot md-card-header md-card-avatar{
+    cursor: pointer;
 }
 md-card.card-shot md-card-actions{
     border-bottom: 1px solid #ddd;
