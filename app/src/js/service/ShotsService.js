@@ -27,7 +27,9 @@ angular.module("myApp")
             //获得特定shot
             getAShot: function (shotId) {
                 return $http.get(Base.url+"/shots/" + shotId);
-            }
+            },
+            //
+
         }
         return service;
     }])
@@ -41,7 +43,11 @@ angular.module("myApp")
             //其他用户信息
             getAUser: function (userId) {
                 return $http.get(Base.url+"/users/" + userId);
+            },
+            getUserShots:function (userId) {
+                return $http.get(Base.url+"/users/"+userId+"/shots");
             }
+
         }
     }])
     .factory("LoadingService", [function () {

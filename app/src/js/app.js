@@ -99,11 +99,18 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages","ngSanitize","a
                     resolve: {
                         author:["UserService","$stateParams",function (UserService,$stateParams) {
                             return UserService.getAUser($stateParams.userId);
+                        }],
+                        userShots:["UserService","$stateParams",function (UserService,$stateParams) {
+                            return UserService.getUserShots($stateParams.userId);
                         }]
                     },
-                    controller: ["$scope","$state","author",function ($scope,$state,author) {
-                        $scope.user=author;
-                        console.log($scope.user);
+                    controller: ["$scope","$state","author","userShots",function ($scope,$state,author,userShots) {
+                        $scope.user=author.data;
+                        $scope.shots=userShots.data;
+                        // console.log($scope.user);
+                        console.log(userShots.data);
+
+
                     }]
                 })
                 .state("login", {

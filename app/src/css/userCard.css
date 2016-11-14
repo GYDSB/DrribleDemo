@@ -1,0 +1,73 @@
+md-content{
+    background-color: #f4f4f4;
+}
+md-content.user-card{
+    margin:8px;
+    background-color: transparent;
+    /*padding: 8px;*/
+}
+.user-basic{
+    padding: 8px;
+    background-color: white;
+    border-radius: 5px;
+}
+.user-basic img.user-avatar{
+    width: 80px;
+    height: auto;
+    border-radius: 50%;
+}
+.user-basic .name{
+    padding: 8px;
+    font-size: 24px;
+    font-weight: 500;
+}
+.user-basic .location{
+    color: #999999;
+    font-size: 16px;
+    font-weight:lighter;
+}
+.user-basic .bio{
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+    word-wrap: break-word;
+}
+.user-shots{
+    padding: 8px;
+    background-color: white;
+    border-radius: 5px;
+}
+a.extra-toggle{
+    font-size: 16px;
+    color: #999999;
+    text-align: center;
+}
+
+.extra .extra-info{
+    border-top: 1px solid #dddddd;
+    padding: 15px 10px;
+}
+.extra-info h3{
+    margin-top: 0;
+    color: #999999;
+    font-size: 13px;
+    font-weight: 500;
+}
+.extra-info .links img{
+    width: 20px;
+    height: 20px;
+    opacity: 0.37;
+}
+.extra-info .links a{
+    color: #444;
+}
+.links .md-icon-button:hover img{
+    opacity: 0.8;
+}
+.links .md-icon-button:hover ~a{
+    color: #1a87ff;
+}
+md-grid-list.user-shots-list{
+    padding-top: 0;
+    /*background-color: white;*/
+}

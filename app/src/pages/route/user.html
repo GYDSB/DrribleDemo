@@ -1,1 +1,56 @@
-<h1>user</h1>
+<md-content layout="column" layout-gt-sm="row"
+            class="user-card" layout-align-gt-sm="center none">
+    <div class="user-basic" flex-gt-sm="30" layout="column"
+         layout-align="center none" layout-margin>
+        <h2 layout="column" layout-align="center center">
+            <img ng-src="{{user['avatar_url']}}" alt=""
+                 class="user-avatar">
+            <span class="name">{{user['name']}}</span>
+            <i class="location">{{user['location']}}</i>
+        </h2>
+        <div class="bio" ng-bind-html="user['bio']">
+            <!--{{user['bio']}}-->
+        </div>
+        <div class="extra" layout="column" layout-align="stretch">
+            <div class="extra-info">
+                <h3>SKILLS</h3>
+                <div class="skill">
+                    skills
+                </div>
+            </div>
+
+            <div class="extra-info">
+                <h3>ELSEWHERE</h3>
+                <div class="contact" layout="column">
+                    <div class="links">
+                        <md-button class="md-icon-button">
+                            <img src="images/website.png" alt="website">
+                        </md-button>
+                        <a ng-href="{{user['links']['web']}}">Web</a>
+                    </div>
+                    <div class="links">
+                        <md-button class="md-icon-button">
+                            <img src="images/twitter.png" alt="twitter">
+                        </md-button>
+                        <a ng-href="{{user['links']['twitter']}}">Twitter</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="user-shots" flex-gt-sm="60" layout-margin>
+        <md-grid-list md-cols="2" md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5"
+                      md-gutter="12px" md-gutter-md="12px"
+                      md-row-height="4:3" md-row-height-gt-sm="1:1" class="shots-list user-shots-list" >
+            <md-grid-tile ng-repeat="shot in shots">
+                <div layout="column">
+                    <div layout="column" class="shot-teaser">
+                        <img lazy-img="{{shot.images['teaser']}}" alt="shot">
+                    </div>
+                </div>
+            </md-grid-tile>
+        </md-grid-list>
+    </div>
+
+</md-content>
