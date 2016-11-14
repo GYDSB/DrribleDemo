@@ -45,7 +45,8 @@
     </md-card-actions>
 
     <md-card-content class="shot-content">
-        <div ng-bind-html="shot['description']" class="shot-description">
+        <!--if don't have description-->
+        <div ng-bind-html="shot['description']" class="shot-description" ng-hide="shot['description']==null">
 
         </div>
         <div class="shot-tags">
