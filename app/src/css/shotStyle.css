@@ -33,6 +33,7 @@ md-card.card-shot md-card-header img{
 md-card.card-shot md-card-header md-card-header-text .md-title{
     font-size: 16px;
 }
+
 md-card.card-shot a{
     text-decoration: none;
     color: #3a8bbb;
@@ -82,18 +83,17 @@ md-card.card-shot md-card-content {
 .shot-comment .c-header .c-sort a:focus{
     color: black;
 }
-.shot-comment img.c-avatar{
+.shot-comment .comment-box img.c-avatar{
     width: 40px;
     height:40px;
     border-radius: 50%;
-    /*margin-right: 16px;*/
 }
 .shot-comment .comment-box{
     padding: 16px;
     border-bottom: 1px solid #ddd;
 }
 .shot-comment .comment-box div{
-    padding: 0 0 16px 16px;
+    margin-left: 16px;
 }
 .shot-comment .comment-box .c-content p{
     margin: 8px;
