@@ -33,6 +33,14 @@ angular.module("myApp")
         }
         return service;
     }])
+    .factory("CommentsService",["Base","$http",function (Base,$http) {
+        var service={
+            getComments:function (shotId) {
+                return $http.get(Base.url+'/shots/'+shotId+'/comments');
+            }
+        }
+        return service;
+    }])
     .factory("UserService", ["Base","$http", function (Base,$http) {
         //    获取用户信息
         return {
@@ -116,7 +124,7 @@ angular.module("myApp")
             formatTime:function (past) {
                 //获取当前时间
                 var curDate=new Date();
-                var pastDate=new Date(past.toString());
+                var pastDate=new Date(past);
 
                 var diffSeconds=curDate-pastDate;
                 //相差天数
@@ -125,12 +133,12 @@ angular.module("myApp")
                 var hour=Math.floor(diffSeconds/(3600*1000));
 
                 var minute=Math.floor(diffSeconds/(60*1000));
-                if (day>=0){
+                if (day>0){
                     return pastDate.toDateString();
-                }else if(hour>=0){
+                }else if(hour>0){
                     return "about "+hour+" hours ago";
-                }else if(minute>=0){
-                    return "about "+minute+" minute ago";
+                }else if(minute>0){
+                    return minute+" minute ago";
                 }
                 else {
                     return "1 minutes ago";

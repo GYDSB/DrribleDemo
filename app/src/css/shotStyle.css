@@ -22,7 +22,7 @@ span.avatar-name{
     margin: 0 8px;
 }
 md-card.card-shot{
-    /*background-color:transparent;*/
+    background-color:transparent;
 }
 md-card.card-shot md-card-header{
     padding: 16px 8px 20px 8px;
@@ -54,8 +54,11 @@ md-card.card-shot md-card-content {
     border-bottom: 1px solid #ddd;
 }
 .shot-content .shot-tags span{
-    color: #555555;
+    color: darkgray;
     font-style: italic;
+}
+.shot-content .shot-tags h3{
+    font-weight: 500;
 }
 .md-button md-icon.rebound-btnIcon{
     color: #7bbb5e;
@@ -64,4 +67,39 @@ md-card.card-shot md-card-content {
 .shot-content p{
     margin-bottom: 10px;
     line-height: 24px;
+    font-size: 18px;
+}
+
+.shot-comment .c-header{
+    margin: 16px;
+}
+.shot-comment .c-header .c-sort a{
+    font-size: 14px;
+    color: darkgray;
+    margin-left: 14px;
+    outline: none;
+}
+.shot-comment .c-header .c-sort a:focus{
+    color: black;
+}
+.shot-comment img.c-avatar{
+    width: 40px;
+    height:40px;
+    border-radius: 50%;
+    /*margin-right: 16px;*/
+}
+.shot-comment .comment-box{
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
+}
+.shot-comment .comment-box div{
+    padding: 0 0 16px 16px;
+}
+.shot-comment .comment-box .c-content p{
+    margin: 8px;
+    font-size: 16px;
+}
+.shot-comment .comment-box .c-time{
+    font-size: 14px;
+    color: darkgray;
 }

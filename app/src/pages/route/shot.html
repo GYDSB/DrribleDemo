@@ -1,6 +1,6 @@
-<md-card flex layout-fill="" class="card-shot">
+<md-card  layout-fill="" class="card-shot">
     <md-card-header>
-        <md-card-avatar ng-click="goUser(shot['user'].id)" >
+        <md-card-avatar ng-click="goUser(shot['user'].id)">
             <img ng-src="{{shot['user'].avatar_url}}" alt="user">
         </md-card-avatar>
         <md-card-header-text>
@@ -28,14 +28,14 @@
             <span>{{shot['likes_count']}}</span>
         </md-button>
 
-        <md-button flex="" ng-disabled="true"  >
+        <md-button flex="" ng-disabled="true">
             <md-icon class="material-icons"
                      aria-label="view">
                 remove_red_eye
             </md-icon>
             <span>{{shot['views_count']}}</span>
         </md-button>
-        <md-button flex="" ng-disabled="true"  >
+        <md-button flex="" ng-disabled="true">
             <md-icon class="material-icons"
                      aria-label="comment">
                 comment
@@ -49,6 +49,26 @@
         <div ng-bind-html="shot['description']" class="shot-description" ng-hide="shot['description']==null">
 
         </div>
+
+        <div class="shot-comment">
+            <div class="c-header" layout="row" layout-align="space-between none">
+                <span>{{shot['comments_count']}} responses</span>
+                <div class="c-sort">
+                    <a href="" ng-click="sortByOldestTime()">Oldest</a>
+                    <a href="" ng-click="sortByNewestTime()">Newest</a>
+                </div>
+            </div>
+            <div class="comment-box" ng-repeat="comment in comments"
+                 layout="row">
+                <img class="c-avatar" ng-src="{{comment['user']['avatar_url']}}">
+                <div layout="column">
+                    <span class="c-name">{{comment['user']['name']}}</span>
+                    <span class="c-content" ng-bind-html="comment['body']"></span>
+                    <span class="c-time">{{createTime(comment['created_at'])}}</span>
+                </div>
+            </div>
+        </div>
+
         <div class="shot-tags">
             <h3>Tags</h3>
             <div layout-wrap="" layout="row">
@@ -60,3 +80,4 @@
     </md-card-content>
 
 </md-card>
+
