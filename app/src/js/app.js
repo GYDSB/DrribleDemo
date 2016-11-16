@@ -32,8 +32,9 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                     },
                     controller: ["shotsData", "shotsInit", "$scope", "$state", "LoadingService", "LikedService",
                         function (shotsData, shotsInit, $scope, $state, LoadingService, LikedService) {
-                            var shots = shotsData.data;
-                            $scope.shots = shots;
+                            // var shots = ;
+                            //初始数据获取page=1
+                            $scope.shots =shotsData.data;
 
                             //shot-page路由跳转处理
                             $scope.goShot = function (shotId) {
@@ -42,6 +43,10 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                             //shot-user（shot作者）路由跳转处理
                             $scope.goUser = function (userId) {
                                 $state.go('users', {"userId": userId});
+                            }
+
+                            $scope.sort=function (type) {
+                            //    根据type判断排序方式
                             }
 
                             //页面切换监听

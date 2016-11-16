@@ -14,15 +14,13 @@ angular.module("myApp")
             //获得默认格式的shots
             params:{
                 "page":1,
-                "per_page":30,
-                "t":new Date().getTime()
+                "per_page":12,
+            },
+            setParams:function (params) {
+              service.params=params;
             },
             getShots: function () {
-                return $http({
-                    method:'GET',
-                    url:Base.url+'/shots',
-                    params:service.params
-                });
+                return $http.get(Base.url+"/shots",{params:service.params});
             },
             //获得特定shot
             getAShot: function (shotId) {
@@ -55,7 +53,6 @@ angular.module("myApp")
             getUserShots:function (userId) {
                 return $http.get(Base.url+"/users/"+userId+"/shots");
             }
-
         }
     }])
     .factory("LoadingService", [function () {
