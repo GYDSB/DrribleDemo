@@ -1,4 +1,5 @@
-
+<md-content infinite-scroll="nextPage()"  infinite-scroll-distance='1'
+            infinite-scroll-disabled="isPending" layout-fill="">
     <md-grid-list md-cols="2" md-cols-xs="2" md-cols-sm="3"
                   md-cols-gt-sm="4" md-cols-md="5" md-cols-gt-md="5"
                   md-gutter="12px" md-gutter-md="12px"
@@ -6,15 +7,22 @@
         <md-grid-tile ng-repeat="shot in shots">
             <div layout="column">
                 <div layout="column" class="shot-teaser" style="" ng-click="goShot(shot.id)">
-                    <img lazy-img="{{shot.images['teaser']}}" alt="shot">
+                    <img ng-src="{{shot.images['teaser']}}" alt="shot">
                 </div>
 
                 <div layout="row" class="shot-avatar" layout-align="start center" style="margin: 8px;" hide show-gt-sm>
-                    <img lazy-img="{{shot['user'].avatar_url}}" alt="user"
+                    <img ng-src="{{shot['user'].avatar_url}}" alt="user"
                          ng-click="goUser(shot['user'].id)">
                     <span class="avatar-name">{{shot['user'].name}}</span>
                 </div>
             </div>
         </md-grid-tile>
+        <md-grid-tile md-colspan="2" md-colspan-xs="2" md-colspan-sm="3"
+                      md-colspan-gt-sm="4" md-colspan-md="5" md-colspan-gt-md="5">
+            加载中
+        </md-grid-tile>
     </md-grid-list>
+
+</md-content>
+
 

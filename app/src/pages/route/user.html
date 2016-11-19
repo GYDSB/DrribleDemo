@@ -9,16 +9,9 @@
             <i class="location">{{user['location']}}</i>
         </h2>
         <div class="bio" ng-bind-html="user['bio']">
-            <!--{{user['bio']}}-->
+
         </div>
         <div class="extra" layout="column" layout-align="stretch">
-            <!--<div class="extra-info">-->
-                <!--<h3>SKILLS</h3>-->
-                <!--<div class="skill">-->
-                    <!--skills-->
-                <!--</div>-->
-            <!--</div>-->
-
             <div class="extra-info">
                 <h3>ELSEWHERE</h3>
                 <div class="contact" layout="column">
@@ -46,11 +39,10 @@
             <md-grid-tile ng-repeat="shot in shots">
                 <div layout="column">
                     <div layout="column" class="shot-teaser">
-                        <img lazy-img="{{shot.images['teaser']}}" alt="shot">
+                        <img ng-src="{{shot.images['teaser']}}" alt="shot">
                     </div>
                 </div>
             </md-grid-tile>
         </md-grid-list>
     </div>
-
 </md-content>

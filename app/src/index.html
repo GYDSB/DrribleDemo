@@ -17,7 +17,7 @@
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
         body{
-            background-color: #f4f4f4;
+            /*background-color: #f4f4f4;*/
         }
         a{
             text-decoration: none;
@@ -42,24 +42,13 @@
         }
     </style>
 </head>
-<body ng-app="myApp">
-<div layout="row" ng-controller="myController" layout-fill="">
+<body ng-app="myApp"
+      ng-controller="myController" layout="column" >
 
-    <div layout="column" flex  layout-fill="">
-        <md-toolbar layout="column" layout-align="start center">
-            <div class="md-toolbar-tools drrible-toolbar" layout="row" layout-fill="" flex>
-                <md-button hide-gt-sm>
-                    <md-icon class="md-icon-button" md-svg-src="images/menu.svg"
-                             aria-label="Menu">
-                    </md-icon>
-                </md-button>
-            </div>
-        </md-toolbar>
-        <md-content ui-view="" id="scrollable" lazy-img-container="">
+<div ui-view="">
 
-        </md-content>
-    </div>
 </div>
+
 
 
 <!--路由跳转-->
@@ -73,6 +62,7 @@
 <script src="js/angular-messages.min.js"></script>
 <script src="js/angular-sanitize.min.js"></script>
 <script src="js/angular-lazy-img.min.js"></script>
+<script src="js/ng-infinite-scroll.min.js"></script>
 
 <script src="js/app.js"></script>
 <script src="js/controller/indexCtrl.js"></script>

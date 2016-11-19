@@ -10,7 +10,6 @@ md-grid-list.shots-list{
 }
 .shots-list .shot-avatar{
     margin: 8px;
-
 }
 .shots-list .shot-avatar>img{
     width: 24px;
@@ -22,10 +21,10 @@ span.avatar-name{
     margin: 0 8px;
 }
 md-card.card-shot{
-    background-color:transparent;
+    /*background-color: #dddddd;*/
 }
 md-card.card-shot md-card-header{
-    padding: 16px 8px 20px 8px;
+    padding: 16px 8px;
 }
 md-card.card-shot md-card-header img{
     border-radius: 50%;
@@ -46,7 +45,7 @@ md-card.card-shot md-card-actions{
     padding-bottom: 8px;
 }
 md-card.card-shot md-card-content {
-    font-size: 1.6rem;
+    font-size: 16px;
     padding: 0px 16px;
     /*color: #555555;*/
 
@@ -63,7 +62,6 @@ md-card.card-shot md-card-content {
 }
 .md-button md-icon.rebound-btnIcon{
     color: #7bbb5e;
-
 }
 .shot-content p{
     margin-bottom: 10px;

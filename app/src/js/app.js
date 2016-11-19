@@ -1,7 +1,7 @@
 /**
  * Created by guoyang on 2016/11/6.
  */
-angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", "angularLazyImg"])
+angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", "infinite-scroll", "angularLazyImg"])
 
     .config(["$httpProvider", function ($httpProvider) {
         $httpProvider.defaults.headers.common["Authorization"] = "Bearer c55bc43fc394e09f2905217c300272db380f9c224aa2a223454af2256b6386fa";
@@ -17,7 +17,7 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                     resolve: {
                         //页面加载前获取数据
                         shotsData: ["ShotsService", function (ShotsService) {
-                            return ShotsService.getShots();
+                            ShotsService.getShots();
                         }],
                         //初始化likes列表
                         likesInit: ["LikedService", function (LikedService) {
@@ -28,13 +28,18 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                             angular.forEach(likes, function (like) {
                                 LikedService.likesList.push(like.shot.id);
                             })
+                            console.log("初始化完成" + LikedService.likesList)
                         }]
                     },
-                    controller: ["shotsData", "shotsInit", "$scope", "$state", "LoadingService", "LikedService",
-                        function (shotsData, shotsInit, $scope, $state, LoadingService, LikedService) {
+                    controller: ["shotsData", "shotsInit", "$scope", "$state", "LoadingService", "LikedService", "ShotsService",
+                        function (shotsData, shotsInit, $scope, $state, LoadingService, LikedService, ShotsService) {
                             // var shots = ;
                             //初始数据获取page=1
-                            $scope.shots =shotsData.data;
+                            $scope.shots = ShotsService.shots;
+                            $scope.nextPage = function () {
+                                ShotsService.getShots();
+                            }
+                            $scope.isPending = ShotsService.isPending;
 
                             //shot-page路由跳转处理
                             $scope.goShot = function (shotId) {
@@ -45,8 +50,8 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                                 $state.go('users', {"userId": userId});
                             }
 
-                            $scope.sort=function (type) {
-                            //    根据type判断排序方式
+                            $scope.sort = function (type) {
+                                //    根据type判断排序方式
                             }
 
                             //页面切换监听
@@ -70,39 +75,60 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                         comments: ["CommentsService", "$stateParams",
                             function (CommentsService, $stateParams) {
                                 return CommentsService.getComments($stateParams.shotId);
+                            }],
+                        isLike: ["LikedService", "$stateParams", "$q",
+                            function (LikedService, $stateParams, $q) {
+                                return LikedService.isUserLike($stateParams.shotId)
+                                    .then(function (success) {
+                                        return success;
+                                    }).catch(function (error) {
+                                        return error;
+                                    })
+
                             }]
                     },
-                    controller: ["$scope", "$state", "shot", "comments", "FormatService", "LikedService",
-                        function ($scope, $state, shot, comments, FormatService, LikedService) {
+                    controller: ["$scope", "$state", "shot", "comments","isLike", "FormatService", "LikedService",
+                        function ($scope, $state, shot, comments,isLike, FormatService, LikedService) {
                             $scope.shot = shot.data;
-                            $scope.comments=comments.data;
-                            console.log($scope.comments);
+                            $scope.comments = comments.data;
+                            // console.log(isLike)
+                            // $scope.likeFlag=true;
+                            if(isLike.status==200){
+                                $scope.likeFlag=true;
+                            }else $scope.likeFlag=false;
+
                             $scope.createTime = function (time) {
                                 return FormatService.formatTime(time);
                             }
-
                             $scope.toggleLike = function (shot) {
-                                LikedService.toggleLike(shot);
-                            }
-
-                            $scope.isLikeShot = function (shotId) {
-                                return LikedService.isLikeShot(shotId);
+                                if ($scope.likeFlag) {
+                                    $scope.likeFlag = false;
+                                    shot["likes_count"] -= 1;
+                                    // console.log("unlike");
+                                    LikedService.removeLikeShot(shot.id);
+                                }
+                                else {
+                                    $scope.likeFlag = true;
+                                    shot["likes_count"] += 1;
+                                    // console.log("like");
+                                    LikedService.addLikeShot(shot.id);
+                                }
                             }
 
                             //评论排序
-                            $scope.sortByNewestTime=function () {
-                                $scope.comments.sort(function (a,b) {
-                                    var t1=new Date(a['created_at']);
-                                    var t2=new Date(b['created_at']);
-                                    return t2-t1;
+                            $scope.sortByNewestTime = function () {
+                                $scope.comments.sort(function (a, b) {
+                                    var t1 = new Date(a['created_at']);
+                                    var t2 = new Date(b['created_at']);
+                                    return t2 - t1;
 
                                 })
                             }
-                            $scope.sortByOldestTime=function () {
-                                $scope.comments.sort(function (a,b) {
-                                    var t1=new Date(a['created_at']);
-                                    var t2=new Date(b['created_at']);
-                                    return t1-t2;
+                            $scope.sortByOldestTime = function () {
+                                $scope.comments.sort(function (a, b) {
+                                    var t1 = new Date(a['created_at']);
+                                    var t2 = new Date(b['created_at']);
+                                    return t1 - t2;
                                 })
                             }
 

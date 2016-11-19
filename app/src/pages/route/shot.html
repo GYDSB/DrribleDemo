@@ -22,7 +22,7 @@
 
         <md-button flex="" ng-click="toggleLike(shot)" md-no-ink="true">
             <md-icon class="material-icons" aria-label="favorite"
-                     ng-class="{'shot-like':isLikeShot(shot.id)}">
+                     ng-class="{'shot-like':likeFlag}">
                 favorite
             </md-icon>
             <span>{{shot['likes_count']}}</span>
