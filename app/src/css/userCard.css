@@ -7,9 +7,22 @@ md-content.user-card{
     /*padding: 8px;*/
 }
 .user-basic{
+    position: relative;
     padding: 8px;
     background-color: white;
     border-radius: 5px;
+}
+/*标记pro*/
+.user-basic .mark-pro{
+    position: absolute;
+    top: 10px;
+    background-color: darkgray;
+    padding: 2px;
+    border-radius: 2px;
+    color: white;
+}
+.user-basic .mark-pro:hover{
+    background-color: #6cc;
 }
 .user-basic img.user-avatar{
     width: 80px;
@@ -17,7 +30,7 @@ md-content.user-card{
     border-radius: 50%;
 }
 .user-basic .name{
-    padding: 8px;
+    /*padding: 8px;*/
     font-size: 24px;
     font-weight: 500;
 }
@@ -76,7 +89,6 @@ a.extra-toggle{
 
 md-grid-list.user-shots-list{
     padding-top: 0;
-    /*background-color: white;*/
 }
 .shot-btn-group{
     padding: 4px;
@@ -84,10 +96,34 @@ md-grid-list.user-shots-list{
 .shot-btn-group a{
     padding: 0px 4px;
     color: darkgray;
+    /*font-size: 14px;*/
 }
 
 .shot-btn-group i{
-
     font-size: 14px;
     margin-right: 4px;
 }
+.user-shots{
+    padding-top: 0;
+
+}
+.user-shots .user-shots-header{
+    margin-top: 0;
+    background-color: white;
+    border-radius: 5px;
+}
+.user-shots .user-shots-header .user-shots-header-tool{
+    padding: 8px;
+    font-size: 10px;
+    color: #999999;
+}
+.user-shots-header-tool span{
+    margin-right: 4px;
+}
+.user-shots-header-tool span:first-child{
+    color: #444;
+}
+.user-shots-header-tool:hover{
+    opacity: 0.5;
+}
+
