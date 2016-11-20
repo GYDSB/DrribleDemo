@@ -12,14 +12,20 @@
     <img ng-src="{{shot.images['hidpi']}}" alt="shot" class="md-card-image">
 
 
-    <md-card-actions layout="row" layout-align="center center">
+    <md-card-actions layout="row" layout-align="space-between center">
 
-        <md-button flex="" class="md-icon-button">
-            <md-icon class="material-icons rebound-btnIcon" aria-label="rebound">
+        <md-button flex="" class="md-icon-button" ng-click="share()" >
+            <md-icon class="material-icons rebound-btnIcon" aria-label="rebound"
+                     ng-class="{'share-after':isShare,'share-before':!isShare}">
                 reply
             </md-icon>
         </md-button>
-
+        <div class="share-btn-group" layout="row" ng-show="isShare">
+            <md-button>
+            </md-button>
+            <md-button></md-button>
+            <md-button></md-button>
+        </div>
         <md-button flex="" ng-click="toggleLike(shot)" md-no-ink="true">
             <md-icon class="material-icons" aria-label="favorite"
                      ng-class="{'shot-like':likeFlag}">
@@ -60,9 +66,11 @@
             </div>
             <div class="comment-box" ng-repeat="comment in comments"
                  layout="row">
-                <img class="c-avatar" ng-src="{{comment['user']['avatar_url']}}">
+                <img class="c-avatar"
+                     ng-src="{{comment['user']['avatar_url']}}"
+                     ng-click="goUser(comment['user']['id'])">
                 <div layout="column">
-                    <span class="c-name">{{comment['user']['name']}}</span>
+                    <a class="c-name" ng-click="goUser(comment['user']['id'])">{{comment['user']['name']}}</a>
                     <span class="c-content" ng-bind-html="comment['body']"></span>
                     <span class="c-time">{{createTime(comment['created_at'])}}</span>
                 </div>

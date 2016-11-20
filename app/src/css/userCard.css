@@ -1,5 +1,5 @@
 md-content{
-    background-color: #f4f4f4;
+    /*background-color: #f4f4f4;*/
 }
 md-content.user-card{
     margin:8px;
@@ -23,7 +23,7 @@ md-content.user-card{
 }
 .user-basic .location{
     color: #999999;
-    font-size: 16px;
+    /*font-size: 16px;*/
     font-weight:lighter;
 }
 .user-basic .bio{
@@ -32,10 +32,16 @@ md-content.user-card{
     text-align: center;
     word-wrap: break-word;
 }
+.user-basic .user-btn-group md-button{
+    font-size: 14px;
+}
 .user-shots{
     padding: 8px;
-    background-color: white;
+    /*background-color: white;*/
     border-radius: 5px;
+}
+.shot-teaser img{
+    width: 100%;
 }
 a.extra-toggle{
     font-size: 16px;
@@ -67,7 +73,21 @@ a.extra-toggle{
 .links .md-icon-button:hover ~a{
     color: #1a87ff;
 }
+
 md-grid-list.user-shots-list{
     padding-top: 0;
     /*background-color: white;*/
+}
+.shot-btn-group{
+    padding: 4px;
+}
+.shot-btn-group a{
+    padding: 0px 4px;
+    color: darkgray;
+}
+
+.shot-btn-group i{
+
+    font-size: 14px;
+    margin-right: 4px;
 }

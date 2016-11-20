@@ -9,6 +9,7 @@
     <!--<link rel="stylesheet" href="css/me-pageloading.min.css">-->
     <link rel="stylesheet" href="css/shotStyle.css">
     <link rel="stylesheet" href="css/userCard.css">
+    <!--<link rel="stylesheet" href="css/mobile-angular-ui-base.css">-->
     <style>
 
         html {
@@ -17,7 +18,7 @@
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
         body{
-            /*background-color: #f4f4f4;*/
+
         }
         a{
             text-decoration: none;
@@ -40,12 +41,15 @@
         .dribble-btn-group .md-button{
             font-size: 14px;
         }
+        .router-change{
+            background-color: #f4f4f4;
+        }
     </style>
 </head>
 <body ng-app="myApp"
       ng-controller="myController" layout="column" >
 
-<div ui-view="">
+<div ui-view="" class="router-change">
 
 </div>
 

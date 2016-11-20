@@ -87,30 +87,32 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
 
                             }]
                     },
-                    controller: ["$scope", "$state", "shot", "comments","isLike", "FormatService", "LikedService",
-                        function ($scope, $state, shot, comments,isLike, FormatService, LikedService) {
+                    controller: ["$scope", "$state", "shot", "comments", "isLike", "FormatService", "LikedService",
+                        function ($scope, $state, shot, comments, isLike, FormatService, LikedService) {
                             $scope.shot = shot.data;
                             $scope.comments = comments.data;
                             // console.log(isLike)
                             // $scope.likeFlag=true;
-                            if(isLike.status==200){
-                                $scope.likeFlag=true;
-                            }else $scope.likeFlag=false;
-
+                            if (isLike.status == 200) {
+                                $scope.likeFlag = true;
+                            } else $scope.likeFlag = false;
+                            $scope.isShare = false;
+                            $scope.share = function () {
+                                $scope.isShare = !$scope.isShare;
+                            }
                             $scope.createTime = function (time) {
                                 return FormatService.formatTime(time);
                             }
+
                             $scope.toggleLike = function (shot) {
                                 if ($scope.likeFlag) {
                                     $scope.likeFlag = false;
                                     shot["likes_count"] -= 1;
-                                    // console.log("unlike");
                                     LikedService.removeLikeShot(shot.id);
                                 }
                                 else {
                                     $scope.likeFlag = true;
                                     shot["likes_count"] += 1;
-                                    // console.log("like");
                                     LikedService.addLikeShot(shot.id);
                                 }
                             }
@@ -154,18 +156,23 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                         author: ["UserService", "$stateParams", function (UserService, $stateParams) {
                             return UserService.getAUser($stateParams.userId);
                         }],
+                        //初始化首次加载数据
                         userShots: ["UserService", "$stateParams", function (UserService, $stateParams) {
-                            return UserService.getUserShots($stateParams.userId);
+                            UserService.getUserShots($stateParams.userId);
                         }]
                     },
-                    controller: ["$scope", "$state", "author", "userShots", function ($scope, $state, author, userShots) {
-                        $scope.user = author.data;
-                        $scope.shots = userShots.data;
-                        // console.log($scope.user);
-                        console.log(userShots.data);
+                    controller: ["$scope", "$state", "author", "userShots", "UserService","$stateParams",
+                        function ($scope, $state, author, userShots, UserService,$stateParams) {
+                            $scope.user = author.data;
+                            $scope.shots = UserService.shots;
+                            $scope.nextPage = function () {
+                                UserService.getUserShots($stateParams.userId);
+                            }
+                            // console.log($scope.user);
+                            // console.log(userShots.data);
 
 
-                    }]
+                        }]
                 })
                 .state("login", {
                     url: "/login",

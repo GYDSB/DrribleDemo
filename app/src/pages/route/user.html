@@ -1,16 +1,36 @@
-<md-content layout="column" layout-gt-sm="row"
-            class="user-card" layout-align-gt-sm="center none">
+<div layout="column" layout-gt-sm="row"
+     class="user-card" layout-align-gt-sm="center start"
+     infinite-scroll="nextPage()" infinite-scroll-distance='1'
+     infinite-scroll-disabled="isPending">
     <div class="user-basic" flex-gt-sm="30" layout="column"
          layout-align="center none" layout-margin>
-        <h2 layout="column" layout-align="center center">
-            <img ng-src="{{user['avatar_url']}}" alt=""
-                 class="user-avatar">
-            <span class="name">{{user['name']}}</span>
-            <i class="location">{{user['location']}}</i>
-        </h2>
-        <div class="bio" ng-bind-html="user['bio']">
+        <div>
+            <h2 layout="column" layout-align="center center">
+                <img ng-src="{{user['avatar_url']}}" alt=""
+                     class="user-avatar">
+                <span class="name">{{user['name']}}</span>
+                <i class="location">{{user['location']}}</i>
+            </h2>
+            <div class="bio" ng-bind-html="user['bio']">
 
+            </div>
+            <div class="user-btn-group" layout="row"
+                 layout-margin layout-align="center center">
+                <md-button class="md-raised md-primary" flex="none">
+                    <md-icon class="material-icons" aria-label="hire">
+                        email
+                    </md-icon>
+                    Hire Me
+                </md-button>
+                <md-button>Follow</md-button>
+                <md-button class="md-icon-button md-accent">
+                    <md-icon class="material-icons" aria-label="hire">
+                        settings
+                    </md-icon>
+                </md-button>
+            </div>
         </div>
+
         <div class="extra" layout="column" layout-align="stretch">
             <div class="extra-info">
                 <h3>ELSEWHERE</h3>
@@ -30,19 +50,47 @@
 
                 </div>
             </div>
+            <div class="extra-info ">
+                <h3>SkILLS</h3>
+            </div>
+            <div class="extra-info">
+                <h3>PROJECTS</h3>
+            </div>
+            <div class="extra-info">
+                <h3>TEAM</h3>
+            </div>
         </div>
     </div>
-    <div class="user-shots" flex-gt-sm="60" layout-margin>
+    <div class="user-shots" flex-gt-sm="60" layout-margin layout="column">
+        <div>标题栏目</div>
         <md-grid-list md-cols="2" md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5"
                       md-gutter="12px" md-gutter-md="12px"
-                      md-row-height="4:3" md-row-height-gt-sm="1:1" class="shots-list user-shots-list" >
+                      md-row-height="1:1" md-row-height-gt-sm="1:1" class="shots-list user-shots-list">
             <md-grid-tile ng-repeat="shot in shots">
-                <div layout="column">
+
+                <div layout="column" style="height: 100%">
                     <div layout="column" class="shot-teaser">
                         <img ng-src="{{shot.images['teaser']}}" alt="shot">
                     </div>
+
+                    <!--max-width-->
+                    <div class="shot-btn-group" hide show-gt-sm
+                         layout="row" layout-align="end center">
+                        <a href="" layout="row" layout-align="space-between center">
+                            <i class="material-icons">
+                                favorite
+                            </i>
+                            <span>{{shot['likes_count']}}</span>
+                        </a>
+                        <a href="" layout="row" layout-align="space-between center">
+                            <i class="material-icons">remove_red_eye</i>
+                            <span>{{shot['views_count']}}</span>
+                        </a>
+                    </div>
                 </div>
+
+
             </md-grid-tile>
         </md-grid-list>
     </div>
-</md-content>
+</div>

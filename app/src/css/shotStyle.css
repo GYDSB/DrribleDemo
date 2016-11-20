@@ -3,7 +3,8 @@ md-grid-list.shots-list{
 }
 .shots-list .shot-teaser{
     padding: 5px;
-    background-color: white
+    background-color: white;
+    width: 100%;
 }
 .shots-list .shot-teaser>img{
     width: 100%;
@@ -17,6 +18,10 @@ md-grid-list.shots-list{
     border-radius: 50%;
     cursor: pointer;
 }
+
+
+
+
 span.avatar-name{
     margin: 0 8px;
 }
@@ -24,14 +29,18 @@ md-card.card-shot{
     /*background-color: #dddddd;*/
 }
 md-card.card-shot md-card-header{
-    padding: 16px 8px;
+    /*padding: 16px 8px;*/
+    margin-bottom: 18px;
 }
 md-card.card-shot md-card-header img{
     border-radius: 50%;
 }
 md-card.card-shot md-card-header md-card-header-text .md-title{
     font-size: 16px;
+    line-height: 1.2;
+    margin-bottom: 4px;
 }
+
 
 md-card.card-shot a{
     text-decoration: none;
@@ -42,7 +51,16 @@ md-card.card-shot md-card-header md-card-avatar{
 }
 md-card.card-shot md-card-actions{
     border-bottom: 1px solid #ddd;
-    padding-bottom: 8px;
+    padding:4px;
+    margin:0;
+    position: relative;
+}
+md-card-actions .share-btn-group{
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    background-color: rgba(0, 0, 0, 0.67);
+    transition:all 0.35s ease-in;
 }
 md-card.card-shot md-card-content {
     font-size: 16px;
@@ -63,6 +81,14 @@ md-card.card-shot md-card-content {
 .md-button md-icon.rebound-btnIcon{
     color: #7bbb5e;
 }
+
+md-icon.share-before{
+    transition:all 0.35s ease-in;
+}
+md-icon.share-after{
+    transform: rotate3d(0,0,1,90deg);
+    transition:all 0.35s ease-in;
+}
 .shot-content p{
     margin-bottom: 10px;
     line-height: 24px;
@@ -82,10 +108,19 @@ md-card.card-shot md-card-content {
     color: black;
 }
 .shot-comment .comment-box img.c-avatar{
-    width: 40px;
-    height:40px;
+    width: 30px;
+    height:30px;
     border-radius: 50%;
+    cursor: pointer;
 }
+.shot-comment .comment-box .c-name{
+    color: black;
+}
+.shot-comment .comment-box .c-name:hover{
+    color: #3a8bbb;
+    cursor: default;
+}
+
 .shot-comment .comment-box{
     padding: 16px;
     border-bottom: 1px solid #ddd;

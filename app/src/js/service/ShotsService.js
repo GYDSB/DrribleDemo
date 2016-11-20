@@ -62,7 +62,14 @@ angular.module("myApp")
     }])
     .factory("UserService", ["Base", "$http", function (Base, $http) {
         //    获取用户信息
-        return {
+        var service = {
+            params: {
+                "page": 1,
+                "per_page": 12,
+            },
+            //is pending shot data
+            isPending: false,
+            shots:new Array(),
             //当前用户信息
             getMyself: function () {
                 return $http.get(Base.url + "/user");
@@ -72,9 +79,28 @@ angular.module("myApp")
                 return $http.get(Base.url + "/users/" + userId);
             },
             getUserShots: function (userId) {
-                return $http.get(Base.url + "/users/" + userId + "/shots");
+                if (service.isPending)
+                    return;
+                if (service.params["page"] > 8) {
+                    console.log("maximum pages cannot be next");
+                    return;
+                }
+                service.isPending = true;
+                var url =Base.url + "/users/" + userId + "/shots";
+
+                $http.get(url, {params: service.params}).then(function (success) {
+                    var items = success.data;
+                    angular.forEach(items, function (item) {
+                        service.shots.push(item);
+                    })
+                    service.params['page'] += 1;
+                    service.isPending = false;
+                },function (error) {
+                    console.log("shot 加载完毕");
+                });
             }
         }
+        return service;
     }])
     .factory("LoadingService", [function () {
         var isLoading = true;
@@ -135,7 +161,7 @@ angular.module("myApp")
                 }
             },
             isUserLike: function (shotId) {
-                return $http.get(Base.url + "/shots/" + shotId + "/like"+Base.suffix)
+                return $http.get(Base.url + "/shots/" + shotId + "/like" + Base.suffix)
             },
 
         }
