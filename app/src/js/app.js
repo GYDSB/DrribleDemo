@@ -16,9 +16,9 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                     templateUrl: "pages/route/shots.html",
                     resolve: {
                         //页面加载前获取数据
-                        shotsData: ["ShotsService", function (ShotsService) {
-                            ShotsService.getShots();
-                        }],
+                        // shotsData: ["ShotsService", function (ShotsService) {
+                        //     ShotsService.getShots();
+                        // }],
                         //初始化likes列表
                         likesInit: ["LikedService", function (LikedService) {
                             return LikedService.init();
@@ -31,16 +31,18 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                             console.log("初始化完成" + LikedService.likesList)
                         }]
                     },
-                    controller: ["shotsData", "$scope", "$state", "LoadingService", "LikedService", "ShotsService",
-                        function (shotsData, $scope, $state, LoadingService, LikedService, ShotsService) {
+                    controller: [ "$scope", "$state", "LoadingService", "LikedService", "ShotsService",
+                        function ($scope, $state, LoadingService, LikedService, ShotsService) {
                             // var shots = ;
                             //初始数据获取page=1
                             $scope.shots = ShotsService.shots;
                             $scope.isPending = ShotsService.isPending;
+
+
                             // console.log($scope.isPending);
                             $scope.nextPage = function () {
-                                // console.log(ShotsService.params);
                                 ShotsService.getShots();
+                                $scope.isFinished = ShotsService.isFinished;
                             }
 
 

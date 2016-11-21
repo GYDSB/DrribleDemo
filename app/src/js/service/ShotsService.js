@@ -22,6 +22,7 @@ angular.module("myApp")
             },
             //is pending shot data
             isPending: false,
+            isFinished:false,
             shots: new Array(),
             setParams: function (params) {
                 service.params = params;
@@ -29,8 +30,9 @@ angular.module("myApp")
             getShots: function () {
                 if (service.isPending)
                     return;
+
                 if (service.params["page"] > 8) {
-                    console.log("maximum pages cannot be next");
+                    service.isFinished=true;
                     return;
                 }
                 service.isPending = true;
@@ -43,7 +45,7 @@ angular.module("myApp")
                     })
                     service.params['page'] += 1;
                     service.isPending = false;
-                    console.log(service.isPending);
+                    // console.log(service.isPending);
                 },function (error) {
 
                 });

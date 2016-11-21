@@ -1,13 +1,14 @@
 <div infinite-scroll="nextPage()"  infinite-scroll-distance='1'
-            infinite-scroll-disabled="isPending" >
+            infinite-scroll-disabled="isPending" layout="column">
     <md-grid-list md-cols="2" md-cols-xs="2" md-cols-sm="3"
-                  md-cols-gt-sm="4" md-cols-md="5" md-cols-gt-md="6"
+                  md-cols-gt-sm="4" md-cols-md="5" md-cols-gt-md="5"
                   md-gutter="12px" md-gutter-md="12px"
                   md-row-height="4:3" md-row-height-gt-sm="1:1" class="shots-list">
         <md-grid-tile ng-repeat="shot in shots">
             <div layout="column">
                 <div layout="column" class="shot-teaser" style="" ng-click="goShot(shot.id)">
-                    <img ng-src="{{shot.images['teaser']}}" alt="shot">
+                    <img ng-src="{{shot.images['teaser']}}" alt="shot" src="images/loading.gif">
+                    <!--缓冲图片-->
                     <span class="animate-mark" ng-show="shot['animated']">GIF</span>
                 </div>
 
@@ -19,6 +20,12 @@
             </div>
         </md-grid-tile>
     </md-grid-list>
+</div>
+<div class="loading-bar" ng-hide="isFinished">
+    <img src="images/load.gif" alt="">
+</div>
+<div class="index-footer">
+    <h4>This is footer of website</h4>
 </div>
 
 

@@ -17,7 +17,7 @@ md-content.user-card{
     position: absolute;
     top: 10px;
     background-color: darkgray;
-    padding: 2px;
+    padding: 4px;
     border-radius: 4px;
     color: white;
 }

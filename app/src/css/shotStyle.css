@@ -7,7 +7,7 @@ md-grid-list.shots-list{
     background-color: white;
     width: 100%;
 }
-.shots-list .shot-teaser>img{
+.shots-list .shot-teaser >img{
     width: 100%;
 }
 .shots-list .shot-avatar{
@@ -28,6 +28,15 @@ md-grid-list.shots-list{
     color: white;
     font-weight: 500;
     font-size: 8px;
+}
+.loading-bar{
+    margin: 20px;
+    background-color: transparent;
+    text-align: center;
+}
+.loading-bar>img{
+    width: 64px;
+    height: 64px;
 }
 
 
@@ -103,6 +112,7 @@ md-icon.share-after{
     margin-bottom: 10px;
     line-height: 24px;
     font-size: 18px;
+    overflow-x: hidden;
 }
 
 .shot-comment .c-header{
