@@ -17,7 +17,8 @@ angular.module("myApp")
                 "per_page": 12,
                 "sort": '',
                 "list": '',
-                "timeframe": ''
+                "timeframe": '',
+                "t":Base.suffix
             },
             //is pending shot data
             isPending: false,
@@ -33,6 +34,7 @@ angular.module("myApp")
                     return;
                 }
                 service.isPending = true;
+
                 var url = Base.url + '/shots';
                 $http.get(url, {params: service.params}).then(function (success) {
                     var items = success.data;
@@ -41,14 +43,16 @@ angular.module("myApp")
                     })
                     service.params['page'] += 1;
                     service.isPending = false;
+                    console.log(service.isPending);
+                },function (error) {
+
                 });
+
             },
             //获得特定shot
             getAShot: function (shotId) {
                 return $http.get(Base.url + "/shots/" + shotId + Base.suffix);
             },
-            //
-
         }
         return service;
     }])
@@ -81,10 +85,6 @@ angular.module("myApp")
             getUserShots: function (userId) {
                 if (service.isPending)
                     return;
-                if (service.params["page"] > 8) {
-                    console.log("maximum pages cannot be next");
-                    return;
-                }
                 service.isPending = true;
                 var url =Base.url + "/users/" + userId + "/shots";
 

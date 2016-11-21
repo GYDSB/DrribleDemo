@@ -2,6 +2,7 @@ md-grid-list.shots-list{
     padding-top: 15px;
 }
 .shots-list .shot-teaser{
+    position: relative;
     padding: 5px;
     background-color: white;
     width: 100%;
@@ -13,12 +14,21 @@ md-grid-list.shots-list{
     margin: 8px;
 }
 .shots-list .shot-avatar>img{
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     cursor: pointer;
 }
-
+.shots-list span.animate-mark{
+    position: absolute;
+    padding: 2px 4px;
+    margin: 4px;
+    border-radius: 4px;
+    background-color: darkgray;
+    color: white;
+    font-weight: 500;
+    font-size: 8px;
+}
 
 
 

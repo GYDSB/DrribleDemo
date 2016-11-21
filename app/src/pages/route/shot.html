@@ -9,7 +9,7 @@
                 <a href="">{{shot['user'].name}}</a> on {{createTime(shot['created_at'])}}</span>
         </md-card-header-text>
     </md-card-header>
-    <img ng-src="{{shot.images['hidpi']}}" alt="shot" class="md-card-image">
+    <img ng-src="{{shot.images['hidpi']||shot.images['normal']}}" alt="shot" class="md-card-image">
 
 
     <md-card-actions layout="row" layout-align="space-between center">

@@ -31,15 +31,18 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                             console.log("初始化完成" + LikedService.likesList)
                         }]
                     },
-                    controller: ["shotsData", "shotsInit", "$scope", "$state", "LoadingService", "LikedService", "ShotsService",
-                        function (shotsData, shotsInit, $scope, $state, LoadingService, LikedService, ShotsService) {
+                    controller: ["shotsData", "$scope", "$state", "LoadingService", "LikedService", "ShotsService",
+                        function (shotsData, $scope, $state, LoadingService, LikedService, ShotsService) {
                             // var shots = ;
                             //初始数据获取page=1
                             $scope.shots = ShotsService.shots;
+                            $scope.isPending = ShotsService.isPending;
+                            // console.log($scope.isPending);
                             $scope.nextPage = function () {
+                                // console.log(ShotsService.params);
                                 ShotsService.getShots();
                             }
-                            $scope.isPending = ShotsService.isPending;
+
 
                             //shot-page路由跳转处理
                             $scope.goShot = function (shotId) {
@@ -165,8 +168,17 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                         function ($scope, $state, author, userShots, UserService,$stateParams) {
                             $scope.user = author.data;
                             $scope.shots = UserService.shots;
+                            $scope.isPending=UserService.isPending;
                             $scope.nextPage = function () {
                                 UserService.getUserShots($stateParams.userId);
+                            }
+                            $scope.showImg=function (images) {
+                                // if(images['hidpi']!=null)return images['hidpi'];
+                                // else if (images['normal']!=null) return images['normal'];
+                                // else return images['teaser'];
+                                // // if(images)c
+                                console.log(images);
+
                             }
                             // console.log($scope.user);
                             // console.log(userShots.data);

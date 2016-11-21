@@ -1,13 +1,14 @@
-<md-content infinite-scroll="nextPage()"  infinite-scroll-distance='1'
-            infinite-scroll-disabled="isPending" layout-fill="">
+<div infinite-scroll="nextPage()"  infinite-scroll-distance='1'
+            infinite-scroll-disabled="isPending" >
     <md-grid-list md-cols="2" md-cols-xs="2" md-cols-sm="3"
-                  md-cols-gt-sm="4" md-cols-md="5" md-cols-gt-md="5"
+                  md-cols-gt-sm="4" md-cols-md="5" md-cols-gt-md="6"
                   md-gutter="12px" md-gutter-md="12px"
                   md-row-height="4:3" md-row-height-gt-sm="1:1" class="shots-list">
         <md-grid-tile ng-repeat="shot in shots">
             <div layout="column">
                 <div layout="column" class="shot-teaser" style="" ng-click="goShot(shot.id)">
                     <img ng-src="{{shot.images['teaser']}}" alt="shot">
+                    <span class="animate-mark" ng-show="shot['animated']">GIF</span>
                 </div>
 
                 <div layout="row" class="shot-avatar" layout-align="start center" style="margin: 8px;" hide show-gt-sm>
@@ -17,12 +18,7 @@
                 </div>
             </div>
         </md-grid-tile>
-        <md-grid-tile md-colspan="2" md-colspan-xs="2" md-colspan-sm="3"
-                      md-colspan-gt-sm="4" md-colspan-md="5" md-colspan-gt-md="5">
-            加载中
-        </md-grid-tile>
     </md-grid-list>
-
-</md-content>
+</div>
 
 
