@@ -29,16 +29,18 @@ md-grid-list.shots-list{
     font-weight: 500;
     font-size: 8px;
 }
-.loading-bar{
-    margin: 20px;
-    background-color: transparent;
-    text-align: center;
-}
-.loading-bar>img{
-    width: 64px;
-    height: 64px;
-}
 
+.sort-bar{
+    padding: 8px;
+}
+.sort-bar a{
+    color: darkgray;
+    font-size: 12px;
+    margin-right:12px;
+}
+.sort-bar a:last-child{
+    margin-right: 0;
+}
 
 
 span.avatar-name{
@@ -46,6 +48,7 @@ span.avatar-name{
 }
 md-card.card-shot{
     /*background-color: #dddddd;*/
+    box-shadow: none;
 }
 md-card.card-shot md-card-header{
     /*padding: 16px 8px;*/

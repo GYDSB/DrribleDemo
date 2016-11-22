@@ -1,5 +1,12 @@
+<div class="sort-bar" layout="row" layout-align="center center">
+    <!--shot sort by-->
+    <a href="">Popular</a>
+    <a href="">Shots</a>
+    <a href="">Now</a>
+</div>
 <div infinite-scroll="nextPage()"  infinite-scroll-distance='1'
-            infinite-scroll-disabled="isPending" layout="column">
+            infinite-scroll-disabled="isPending"
+     layout="column">
     <md-grid-list md-cols="2" md-cols-xs="2" md-cols-sm="3"
                   md-cols-gt-sm="4" md-cols-md="5" md-cols-gt-md="5"
                   md-gutter="12px" md-gutter-md="12px"
@@ -21,11 +28,12 @@
         </md-grid-tile>
     </md-grid-list>
 </div>
-<div class="loading-bar" ng-hide="isFinished">
-    <img src="images/load.gif" alt="">
+
+<div layout="row" layout-sm="column" layout-align="space-around"
+     ng-show="!isFinished" class="loading-bar">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
-<div class="index-footer">
-    <h4>This is footer of website</h4>
-</div>
+
+
 
 

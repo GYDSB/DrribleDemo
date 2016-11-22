@@ -75,6 +75,7 @@ angular.module("myApp")
             },
             //is pending shot data
             isPending: false,
+            isFinished:false,
             shots:new Array(),
             //当前用户信息
             getMyself: function () {

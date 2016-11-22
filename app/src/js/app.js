@@ -1,7 +1,8 @@
 /**
  * Created by guoyang on 2016/11/6.
  */
-angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", "infinite-scroll", "angularLazyImg"])
+angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
+    "ngSanitize", "infinite-scroll", "angularLazyImg","ngTouch"])
 
     .config(["$httpProvider", function ($httpProvider) {
         $httpProvider.defaults.headers.common["Authorization"] = "Bearer c55bc43fc394e09f2905217c300272db380f9c224aa2a223454af2256b6386fa";
@@ -15,11 +16,6 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                     url: "/shots",
                     templateUrl: "pages/route/shots.html",
                     resolve: {
-                        //页面加载前获取数据
-                        // shotsData: ["ShotsService", function (ShotsService) {
-                        //     ShotsService.getShots();
-                        // }],
-                        //初始化likes列表
                         likesInit: ["LikedService", function (LikedService) {
                             return LikedService.init();
                         }],
@@ -28,7 +24,7 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                             angular.forEach(likes, function (like) {
                                 LikedService.likesList.push(like.shot.id);
                             })
-                            console.log("初始化完成" + LikedService.likesList)
+                            // console.log("初始化完成" + LikedService.likesList)
                         }]
                     },
                     controller: [ "$scope", "$state", "LoadingService", "LikedService", "ShotsService",
@@ -43,6 +39,8 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                             $scope.nextPage = function () {
                                 ShotsService.getShots();
                                 $scope.isFinished = ShotsService.isFinished;
+                                // $scope.isScroll=true;
+                                // console.log($event)
                             }
 
 
@@ -59,13 +57,22 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages", "ngSanitize", 
                                 //    根据type判断排序方式
                             }
 
+                            // //移动端Touch事件监听
+                            $scope.touchStart=function ($event) {
+                                $event.stopPropagation();
+                                $event.preventDefault();//阻止浏览器默认事件
+                                console.log($event)
+                            }
+                            // $scope.touchMove=function ($event) {
+                            //     // console.log("touch move")
+                            // }
                             //页面切换监听
-                            $scope.$on("$viewContentLoaded", function (event, viewConfig) {
-                                // 获取任何视图设置的参数，以及一个特殊的属性：viewConfig.targetView
-                                LoadingService.setLoad(false);
-                                console.log("获取数据完成")
-                                // console.log(LoadingService.isLoad())
-                            });
+                            // $scope.$on("$viewContentLoaded", function (event, viewConfig) {
+                            //     // 获取任何视图设置的参数，以及一个特殊的属性：viewConfig.targetView
+                            //     LoadingService.setLoad(false);
+                            //     console.log("获取数据完成")
+                            //     // console.log(LoadingService.isLoad())
+                            // });
 
                         }]
                 })
