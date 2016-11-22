@@ -1,8 +1,15 @@
 <div class="sort-bar" layout="row" layout-align="center center">
     <!--shot sort by-->
-    <a href="">Popular</a>
-    <a href="">Shots</a>
-    <a href="">Now</a>
+    <a href="" ng-repeat="sortBy in obj" ng-click="orderBy($index)">
+        {{sortBy.value[0]}}
+    </a>
+
+    <ul style="position: absolute;list-style: none;
+    margin: 0;padding: 0;top: 32px;background-color: black;width: 100%;z-index: 21">
+        <li ng-repeat="item in obj[selectedItem].value">
+            <a href="" ng-if="$index!=0" ng-click="select(selectedItem,item)">{{item}}</a>
+        </li>
+    </ul>
 </div>
 <div infinite-scroll="nextPage()"  infinite-scroll-distance='1'
             infinite-scroll-disabled="isPending"
@@ -30,6 +37,7 @@
 </div>
 
 <div layout="row" layout-sm="column" layout-align="space-around"
+     style="margin-top: 16px;background-color: #f4f4f4"
      ng-show="!isFinished" class="loading-bar">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>

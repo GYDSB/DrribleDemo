@@ -13,24 +13,64 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
             $urlRouterProvider.otherwise("/shots");
             $stateProvider
                 .state("shots", {
-                    url: "/shots",
+                    url: "/shots?list&sort&timeframe",
                     templateUrl: "pages/route/shots.html",
                     resolve: {
-                        likesInit: ["LikedService", function (LikedService) {
-                            return LikedService.init();
-                        }],
-                        shotsInit: ["LikedService", "likesInit", function (LikedService, likesInit) {
-                            var likes = likesInit.data
-                            angular.forEach(likes, function (like) {
-                                LikedService.likesList.push(like.shot.id);
-                            })
-                            // console.log("初始化完成" + LikedService.likesList)
-                        }]
+                        // likesInit: ["LikedService", function (LikedService) {
+                        //     return LikedService.init();
+                        // }],
+                        // shotsInit: ["LikedService", "likesInit", function (LikedService, likesInit) {
+                        //     var likes = likesInit.data
+                        //     angular.forEach(likes, function (like) {
+                        //         LikedService.likesList.push(like.shot.id);
+                        //     })
+                        //     // console.log("初始化完成" + LikedService.likesList)
+                        // }]
                     },
-                    controller: [ "$scope", "$state", "LoadingService", "LikedService", "ShotsService",
-                        function ($scope, $state, LoadingService, LikedService, ShotsService) {
+                    controller: [ "$scope", "$state", "ShotsService","$stateParams",
+                        function ($scope, $state,  ShotsService,$stateParams) {
                             // var shots = ;
                             //初始数据获取page=1
+
+                            //根据type判断排序方式
+                            //sort:popular,comments,recent,views
+                            //list:animated,attachments,debuts,playoffs,rebounds,teams
+                            //timeframe:week,month,year,ever
+                            console.log($stateParams);
+
+                            //参数数组
+                            $scope.obj=[
+                                {
+                                    key:'sort',
+                                    value:['popular','comments','views','recent'],
+                                },
+                                {
+                                    key:'list',
+                                    value:['animated','attachments','debuts','playoffs','rebounds','teams'],
+                                },
+                                {
+                                    key:'timeframe',
+                                    value:['week','month','year','ever'],
+                                }
+                            ]
+                            //请求参数
+                            $scope.params={
+                                sort:"",
+                                list:"",
+                                timeframe:""
+                            }
+                            $scope.orderBy = function (index) {
+                                $scope.selectedItem=index;
+                                console.log("order by"+$scope.obj[index].key);
+                            }
+
+                            //index代表标记，item代表值
+                            $scope.select=function (index,item) {
+                                var key=$scope.obj[index].key;
+                                $scope.params[key]=item;
+                                console.log($scope.params)
+                            }
+
                             $scope.shots = ShotsService.shots;
                             $scope.isPending = ShotsService.isPending;
 
@@ -39,8 +79,6 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                             $scope.nextPage = function () {
                                 ShotsService.getShots();
                                 $scope.isFinished = ShotsService.isFinished;
-                                // $scope.isScroll=true;
-                                // console.log($event)
                             }
 
 
@@ -53,16 +91,14 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                                 $state.go('users', {"userId": userId});
                             }
 
-                            $scope.sort = function (type) {
-                                //    根据type判断排序方式
-                            }
+                            //筛选order打开方式
 
-                            // //移动端Touch事件监听
-                            $scope.touchStart=function ($event) {
-                                $event.stopPropagation();
-                                $event.preventDefault();//阻止浏览器默认事件
-                                console.log($event)
-                            }
+                            // // //移动端Touch事件监听
+                            // $scope.touchStart=function ($event) {
+                            //     $event.stopPropagation();
+                            //     $event.preventDefault();//阻止浏览器默认事件
+                            //     console.log($event)
+                            // }
                             // $scope.touchMove=function ($event) {
                             //     // console.log("touch move")
                             // }

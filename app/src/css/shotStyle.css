@@ -32,6 +32,7 @@ md-grid-list.shots-list{
 
 .sort-bar{
     padding: 8px;
+    position: relative;
 }
 .sort-bar a{
     color: darkgray;

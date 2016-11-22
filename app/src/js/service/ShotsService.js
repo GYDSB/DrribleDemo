@@ -15,17 +15,17 @@ angular.module("myApp")
             params: {
                 "page": 1,
                 "per_page": 12,
-                "sort": '',
-                "list": '',
-                "timeframe": '',
                 "t":Base.suffix
             },
-            //is pending shot data
+
             isPending: false,
             isFinished:false,
             shots: new Array(),
-            setParams: function (params) {
-                service.params = params;
+            reSetParams: function (params) {
+                service['page']=1;
+                for(var key in params){
+                    service.params[key]=params[key];
+                }
             },
             getShots: function () {
                 if (service.isPending)
