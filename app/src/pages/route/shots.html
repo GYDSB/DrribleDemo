@@ -1,16 +1,14 @@
-<div class="sort-bar" layout="row" layout-align="center center">
-    <!--shot sort by-->
-    <a href="" ng-repeat="sortBy in obj" ng-click="orderBy($index)">
-        {{sortBy.value[0]}}
-    </a>
-
-    <ul style="position: absolute;list-style: none;
-    margin: 0;padding: 0;top: 32px;background-color: black;width: 100%;z-index: 21">
-        <li ng-repeat="item in obj[selectedItem].value">
-            <a href="" ng-if="$index!=0" ng-click="select(selectedItem,item)">{{item}}</a>
-        </li>
-    </ul>
-</div>
+<!--<div class="sort-bar" layout="row" layout-align="center center">-->
+    <!--&lt;!&ndash;shot sort by&ndash;&gt;-->
+    <!--&lt;!&ndash;<a href="" ng-repeat="sortBy in requestObj" ng-click="orderBy($index)">&ndash;&gt;-->
+        <!--&lt;!&ndash;{{sortBy.value[0]}}&ndash;&gt;-->
+    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+    <!--&lt;!&ndash;<ul class="sort-bar-list">&ndash;&gt;-->
+        <!--&lt;!&ndash;<li ng-repeat="item in requestObj[selectedIndex].value">&ndash;&gt;-->
+            <!--&lt;!&ndash;<a href="" ng-if="$index!=0" ng-click="select(selectedIndex,item,$index)">{{item}}</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</li>&ndash;&gt;-->
+    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+<!--</div>-->
 <div infinite-scroll="nextPage()"  infinite-scroll-distance='1'
             infinite-scroll-disabled="isPending"
      layout="column">
@@ -20,10 +18,31 @@
                   md-row-height="4:3" md-row-height-gt-sm="1:1" class="shots-list">
         <md-grid-tile ng-repeat="shot in shots">
             <div layout="column">
-                <div layout="column" class="shot-teaser" style="" ng-click="goShot(shot.id)">
-                    <img ng-src="{{shot.images['teaser']}}" alt="shot" src="images/loading.gif">
+                <div layout="column" class="shot-teaser" style="">
+                    <img ng-src="{{shot.images['teaser']}}" alt="shot"
+                         src="images/loading.gif" ng-click="goShot(shot.id)">
                     <!--缓冲图片-->
                     <span class="animate-mark" ng-show="shot['animated']">GIF</span>
+                    <div class="shot-btn-group" hide show-gt-sm
+                         layout="row" layout-align="end center">
+                        <a href="" layout="row" layout-align="space-between center">
+                            <i class="material-icons" ng-click="toggleLike(shot)"
+                               ng-class="{'shot-like':isLikeShot(shot['id'])}">
+                                favorite
+                            </i>
+                            <span>{{shot['likes_count']|number}}</span>
+                        </a>
+                        <a href="" layout="row" layout-align="space-between center">
+                            <i class="material-icons">remove_red_eye</i>
+                            <span>{{shot['views_count']|number}}</span>
+                        </a>
+                        <a href="" layout="row" layout-align="space-between center">
+                            <i class="material-icons">
+                                comment
+                            </i>
+                            <span>{{shot['comments_count']|number}}</span>
+                        </a>
+                    </div>
                 </div>
 
                 <div layout="row" class="shot-avatar" layout-align="start center" style="margin: 8px;" hide show-gt-sm>

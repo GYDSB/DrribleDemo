@@ -3,7 +3,7 @@ md-grid-list.shots-list{
 }
 .shots-list .shot-teaser{
     position: relative;
-    padding: 5px;
+    padding: 4px;
     background-color: white;
     width: 100%;
 }
@@ -36,13 +36,24 @@ md-grid-list.shots-list{
 }
 .sort-bar a{
     color: darkgray;
-    font-size: 12px;
+    font-size: 14px;
     margin-right:12px;
 }
 .sort-bar a:last-child{
     margin-right: 0;
 }
-
+.sort-bar .sort-bar-list{
+    position: absolute;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    top: 32px;
+    background-color: black;
+    z-index: 21
+}
+.sort-bar .sort-bar-list li{
+    padding: 4px 16px;
+}
 
 span.avatar-name{
     margin: 0 8px;
@@ -74,7 +85,7 @@ md-card.card-shot md-card-header md-card-avatar{
 }
 md-card.card-shot md-card-actions{
     border-bottom: 1px solid #ddd;
-    padding:4px;
+    padding:8px;
     margin:0;
     position: relative;
 }
@@ -85,6 +96,21 @@ md-card-actions .share-btn-group{
     background-color: rgba(0, 0, 0, 0.67);
     transition:all 0.35s ease-in;
 }
+md-card-actions .shot-btn-group{
+    margin-top: 0;
+}
+md-card-actions .shot-btn-group a{
+    padding: 0px 4px;
+    color: darkgray;
+    font-size: 14px;
+}
+
+md-card-actions .shot-btn-group i{
+    font-size: 20px;
+    margin-right: 8px;
+    outline: none;
+}
+
 md-card.card-shot md-card-content {
     font-size: 16px;
     padding: 0px 16px;
@@ -101,7 +127,8 @@ md-card.card-shot md-card-content {
 .shot-content .shot-tags h3{
     font-weight: 500;
 }
-.md-button md-icon.rebound-btnIcon{
+
+i.rebound-btnIcon{
     color: #7bbb5e;
 }
 

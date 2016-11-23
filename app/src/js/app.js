@@ -16,19 +16,19 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                     url: "/shots?list&sort&timeframe",
                     templateUrl: "pages/route/shots.html",
                     resolve: {
-                        // likesInit: ["LikedService", function (LikedService) {
-                        //     return LikedService.init();
-                        // }],
-                        // shotsInit: ["LikedService", "likesInit", function (LikedService, likesInit) {
-                        //     var likes = likesInit.data
-                        //     angular.forEach(likes, function (like) {
-                        //         LikedService.likesList.push(like.shot.id);
-                        //     })
-                        //     // console.log("初始化完成" + LikedService.likesList)
-                        // }]
+                        likesInit: ["LikedService", function (LikedService) {
+                            return LikedService.init();
+                        }],
+                        shotsInit: ["LikedService", "likesInit", function (LikedService, likesInit) {
+                            var likes = likesInit.data
+                            angular.forEach(likes, function (like) {
+                                LikedService.likesList.push(like.shot.id);
+                            })
+                            // console.log("初始化完成" + LikedService.likesList)
+                        }]
                     },
-                    controller: [ "$scope", "$state", "ShotsService","$stateParams",
-                        function ($scope, $state,  ShotsService,$stateParams) {
+                    controller: [ "$scope", "$state", "ShotsService","$stateParams","LikedService",
+                        function ($scope, $state,  ShotsService,$stateParams,LikedService) {
                             // var shots = ;
                             //初始数据获取page=1
 
@@ -38,40 +38,44 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                             //timeframe:week,month,year,ever
                             console.log($stateParams);
 
-                            //参数数组
-                            $scope.obj=[
-                                {
-                                    key:'sort',
-                                    value:['popular','comments','views','recent'],
-                                },
-                                {
-                                    key:'list',
-                                    value:['animated','attachments','debuts','playoffs','rebounds','teams'],
-                                },
-                                {
-                                    key:'timeframe',
-                                    value:['week','month','year','ever'],
-                                }
-                            ]
-                            //请求参数
-                            $scope.params={
-                                sort:"",
-                                list:"",
-                                timeframe:""
-                            }
-                            $scope.orderBy = function (index) {
-                                $scope.selectedItem=index;
-                                console.log("order by"+$scope.obj[index].key);
-                            }
-
-                            //index代表标记，item代表值
-                            $scope.select=function (index,item) {
-                                var key=$scope.obj[index].key;
-                                $scope.params[key]=item;
-                                console.log($scope.params)
-                            }
+                            // //参数数组
+                            // $scope.requestObj=[
+                            //     {
+                            //         key:'sort',
+                            //         value:['popular','comments','views','recent'],
+                            //     },
+                            //     {
+                            //         key:'list',
+                            //         value:['animated','attachments','debuts','playoffs','rebounds','teams'],
+                            //     },
+                            //     {
+                            //         key:'timeframe',
+                            //         value:['week','month','year','ever'],
+                            //     }
+                            // ]
+                            // //请求参数
+                            // $scope.params={
+                            //     sort:"",
+                            //     list:"",
+                            //     timeframe:""
+                            // }
+                            // $scope.orderBy = function (index) {
+                            //     $scope.selectedIndex=index;
+                            //     console.log("order by"+$scope.requestObj[index].key);
+                            // }
+                            //
+                            // //index代表标记，item代表值
+                            // $scope.select=function (selectedIndex,item,index) {
+                            //     var key=$scope.requestObj[selectedIndex].key;
+                            //     //将值添加到数组开头
+                            //     $scope.requestObj[selectedIndex].value.splice(index,1);
+                            //     $scope.requestObj[selectedIndex].value.unshift(item);
+                            //     $scope.params[key]=item;
+                            //     console.log($scope.params)
+                            // }
 
                             $scope.shots = ShotsService.shots;
+                            //是否处于缓冲中
                             $scope.isPending = ShotsService.isPending;
 
 
@@ -81,6 +85,13 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                                 $scope.isFinished = ShotsService.isFinished;
                             }
 
+                            // like operation
+                            $scope.toggleLike=function (shot) {
+                                LikedService.toggleLike(shot);
+                            }
+                            $scope.isLikeShot=function (shotId) {
+                                return LikedService.isLikeShot(shotId);
+                            }
 
                             //shot-page路由跳转处理
                             $scope.goShot = function (shotId) {

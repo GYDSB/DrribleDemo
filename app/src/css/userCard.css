@@ -55,6 +55,10 @@ md-content.user-card{
 }
 .shot-teaser img{
     width: 100%;
+
+}
+img{
+    outline: none;
 }
 a.extra-toggle{
     font-size: 16px;
@@ -91,21 +95,22 @@ md-grid-list.user-shots-list{
     padding-top: 0;
 }
 .shot-btn-group{
-    padding: 4px;
+    margin-top: 4px;
 }
 .shot-btn-group a{
     padding: 0px 4px;
     color: darkgray;
-    /*font-size: 14px;*/
+    font-size: 9px;
+
 }
 
 .shot-btn-group i{
-    font-size: 14px;
+    font-size: 12px;
     margin-right: 4px;
+    outline: none;
 }
 .user-shots{
     padding-top: 0;
-
 }
 .user-shots .user-shots-header{
     margin-top: 0;
