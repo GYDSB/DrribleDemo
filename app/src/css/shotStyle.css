@@ -6,6 +6,7 @@ md-grid-list.shots-list{
     padding: 4px;
     background-color: white;
     width: 100%;
+    border-radius: 1px;
 }
 .shots-list .shot-teaser >img{
     width: 100%;
@@ -19,6 +20,24 @@ md-grid-list.shots-list{
     border-radius: 50%;
     cursor: pointer;
 }
+.shot-avatar .mark-pro,.shot-avatar .mark-team{
+    background-color: darkgray;
+    padding: 1px 2px;
+    border-radius: 3px;
+    font-size: 9px;
+    color: white;
+}
+.shots-list .shot-avatar>img:hover + span{
+    opacity: 0.75;
+
+}
+.shot-avatar .mark-pro:hover{
+    background-color: #6cc;
+}
+.shot-avatar .mark-team:hover{
+    background-color: #6cc;
+}
+
 .shots-list span.animate-mark{
     position: absolute;
     padding: 2px 4px;
@@ -32,28 +51,45 @@ md-grid-list.shots-list{
 
 .sort-bar{
     padding: 8px;
-    position: relative;
+    /*position: relative;*/
+    background-color: #eee;
 }
 .sort-bar a{
     color: darkgray;
     font-size: 14px;
-    margin-right:12px;
+    padding: 0 8px;
+    /*margin-right:12px;*/
 }
-.sort-bar a:last-child{
-    margin-right: 0;
+.sort-bar .sort-bar-item{
+    position: relative;
 }
-.sort-bar .sort-bar-list{
+.sort-bar .sort-bar-item ul{
     position: absolute;
-    list-style: none;
     margin: 0;
-    padding: 0;
-    top: 32px;
-    background-color: black;
-    z-index: 21
+    list-style: none;
+    padding: 4px 0;
+    display: none;
+    z-index: 4;
+    background-color: #eee;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
-.sort-bar .sort-bar-list li{
-    padding: 4px 16px;
+.sort-bar-item ul li{
+    padding: 8px;
 }
+.sort-bar-item ul li:hover{
+    background-color: #bfbfbf;
+    color: black;
+}
+.sort-bar-item:hover ul{
+    display: block;
+}
+
+
+
+
+
+
 
 span.avatar-name{
     margin: 0 8px;

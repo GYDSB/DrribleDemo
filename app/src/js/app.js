@@ -15,6 +15,7 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                 .state("shots", {
                     url: "/shots?list&sort&timeframe",
                     templateUrl: "pages/route/shots.html",
+                    cache:false,
                     resolve: {
                         likesInit: ["LikedService", function (LikedService) {
                             return LikedService.init();
@@ -25,6 +26,9 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                                 LikedService.likesList.push(like.shot.id);
                             })
                             // console.log("初始化完成" + LikedService.likesList)
+                        }],
+                        setParams:["ShotsService","$stateParams",function (ShotsService,$stateParams) {
+                            ShotsService.setParams($stateParams);
                         }]
                     },
                     controller: [ "$scope", "$state", "ShotsService","$stateParams","LikedService",
@@ -36,29 +40,32 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                             //sort:popular,comments,recent,views
                             //list:animated,attachments,debuts,playoffs,rebounds,teams
                             //timeframe:week,month,year,ever
-                            console.log($stateParams);
+
 
                             // //参数数组
-                            // $scope.requestObj=[
-                            //     {
-                            //         key:'sort',
-                            //         value:['popular','comments','views','recent'],
-                            //     },
-                            //     {
-                            //         key:'list',
-                            //         value:['animated','attachments','debuts','playoffs','rebounds','teams'],
-                            //     },
-                            //     {
-                            //         key:'timeframe',
-                            //         value:['week','month','year','ever'],
-                            //     }
-                            // ]
+                            $scope.paramsArray=[
+                                {
+                                    key:'sort',
+                                    values:['popular','comments','views','recent'],
+                                    top:ShotsService.paramss['sort']
+                                },
+                                {
+                                    key:'list',
+                                    values:['shots','animated','attachments','debuts','playoffs','rebounds','teams'],
+                                    top:ShotsService.params['list']
+                                },
+                                {
+                                    key:'timeframe',
+                                    values:['week','month','year','ever'],
+                                    top:ShotsService.params['timeframe']
+                                }
+                            ]
                             // //请求参数
-                            // $scope.params={
-                            //     sort:"",
-                            //     list:"",
-                            //     timeframe:""
-                            // }
+                            $scope.params={
+                                sort:"",
+                                list:"",
+                                timeframe:""
+                            }
                             // $scope.orderBy = function (index) {
                             //     $scope.selectedIndex=index;
                             //     console.log("order by"+$scope.requestObj[index].key);
@@ -100,6 +107,13 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                             //shot-user（shot作者）路由跳转处理
                             $scope.goUser = function (userId) {
                                 $state.go('users', {"userId": userId});
+                            }
+
+                            //重新加载参数
+                            $scope.resetParams=function (key,value) {
+                                var param={}
+                                param[key]=value
+                                $state.go('shots',param,{reload:true});
                             }
 
                             //筛选order打开方式

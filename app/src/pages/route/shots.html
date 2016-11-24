@@ -9,6 +9,17 @@
         <!--&lt;!&ndash;</li>&ndash;&gt;-->
     <!--&lt;!&ndash;</ul>&ndash;&gt;-->
 <!--</div>-->
+<div class="sort-bar" layout="row" layout-align="center center">
+    <div class="sort-bar-item" ng-repeat="param in paramsArray"
+         layout="column">
+        <a href="" class="sort-param" layout-fill="">{{param['top']}}</a>
+        <ul>
+            <li ng-repeat="value in param['values']">
+                <a href="" ng-click="resetParams(param['key'],value)">{{value}}</a>
+            </li>
+        </ul>
+    </div>
+</div>
 <div infinite-scroll="nextPage()"  infinite-scroll-distance='1'
             infinite-scroll-disabled="isPending"
      layout="column">
@@ -49,6 +60,8 @@
                     <img ng-src="{{shot['user'].avatar_url}}" alt="user"
                          ng-click="goUser(shot['user'].id)">
                     <span class="avatar-name">{{shot['user'].name}}</span>
+                    <span class="mark-pro" ng-hide="shot['user']['pro']">PRO</span>
+                    <!--<span class="mark-team" ng-hide="shot['team']==null">TEAM</span>-->
                 </div>
             </div>
         </md-grid-tile>

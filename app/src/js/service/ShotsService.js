@@ -15,17 +15,21 @@ angular.module("myApp")
             params: {
                 "page": 1,
                 "per_page": 12,
-                "t":Base.suffix
+                "sort":'popular',
+                "timeframe":'now',
+                "list":'shots'
             },
 
             isPending: false,
             isFinished:false,
             shots: new Array(),
-            reSetParams: function (params) {
-                service['page']=1;
+            setParams: function (params) {
+                service.shots=[];
                 for(var key in params){
+                    service.params['page']=1;
                     service.params[key]=params[key];
                 }
+                console.log(service.params)
             },
             getShots: function () {
                 if (service.isPending)
