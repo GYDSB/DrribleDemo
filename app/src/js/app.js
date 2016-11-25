@@ -47,17 +47,17 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                                 {
                                     key:'sort',
                                     values:['popular','comments','views','recent'],
-                                    top:ShotsService.paramss['sort']
+                                    top:ShotsService.params['sort']||'popular'
                                 },
                                 {
                                     key:'list',
                                     values:['shots','animated','attachments','debuts','playoffs','rebounds','teams'],
-                                    top:ShotsService.params['list']
+                                    top:ShotsService.params['list']||'shots'
                                 },
                                 {
                                     key:'timeframe',
                                     values:['week','month','year','ever'],
-                                    top:ShotsService.params['timeframe']
+                                    top:ShotsService.params['timeframe']||'Now'
                                 }
                             ]
                             // //请求参数
@@ -65,6 +65,13 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                                 sort:"",
                                 list:"",
                                 timeframe:""
+                            }
+                            $scope.isRecent=function (key) {
+                                // console.log(key)
+                                if($stateParams['sort']=='recent'&&key=='timeframe'){
+                                    return true;
+                                }
+                                return false;
                             }
                             // $scope.orderBy = function (index) {
                             //     $scope.selectedIndex=index;
@@ -229,13 +236,13 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                         author: ["UserService", "$stateParams", function (UserService, $stateParams) {
                             return UserService.getAUser($stateParams.userId);
                         }],
-                        //初始化首次加载数据
-                        userShots: ["UserService", "$stateParams", function (UserService, $stateParams) {
-                            UserService.getUserShots($stateParams.userId);
-                        }]
+                        // //初始化首次加载数据
+                        // userShots: ["UserService", "$stateParams", function (UserService, $stateParams) {
+                        //     UserService.getUserShots($stateParams.userId);
+                        // }]
                     },
-                    controller: ["$scope", "$state", "author", "userShots", "UserService","$stateParams",
-                        function ($scope, $state, author, userShots, UserService,$stateParams) {
+                    controller: ["$scope", "$state", "author", "UserService","$stateParams",
+                        function ($scope, $state, author, UserService,$stateParams) {
                             $scope.user = author.data;
                             $scope.shots = UserService.shots;
                             $scope.isPending=UserService.isPending;
@@ -249,6 +256,10 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                                 // // if(images)c
                                 console.log(images);
 
+                            }
+                            $scope.loadMoreShots=function () {
+                                UserService.isContinued=true;
+                                UserService.getUserShots($stateParams.userId);
                             }
                             // console.log($scope.user);
                             // console.log(userShots.data);

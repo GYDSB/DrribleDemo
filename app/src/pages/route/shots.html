@@ -12,7 +12,7 @@
 <div class="sort-bar" layout="row" layout-align="center center">
     <div class="sort-bar-item" ng-repeat="param in paramsArray"
          layout="column">
-        <a href="" class="sort-param" layout-fill="">{{param['top']}}</a>
+        <a href="" class="sort-param" layout-fill="" ng-hide="isRecent(param['key'])">{{param['top']}}</a>
         <ul>
             <li ng-repeat="value in param['values']">
                 <a href="" ng-click="resetParams(param['key'],value)">{{value}}</a>

@@ -24,12 +24,13 @@ angular.module("myApp")
             isFinished:false,
             shots: new Array(),
             setParams: function (params) {
+                // console.log("init",params);
                 service.shots=[];
+                service.params['page']=1;
                 for(var key in params){
-                    service.params['page']=1;
                     service.params[key]=params[key];
                 }
-                console.log(service.params)
+                // console.log(service.params)
             },
             getShots: function () {
                 if (service.isPending)
@@ -79,7 +80,8 @@ angular.module("myApp")
             },
             //is pending shot data
             isPending: false,
-            isFinished:false,
+            //is continuing loading shots
+            isContinued:false,
             shots:new Array(),
             //当前用户信息
             getMyself: function () {
@@ -93,6 +95,17 @@ angular.module("myApp")
                 if (service.isPending)
                     return;
                 service.isPending = true;
+                //当page翻页至4时开始根据用户选择按需加载,每次加载一页
+                if(service.params['page']>4){
+                    console.log("点击加载更多");
+                    // service.isPending=false;
+                    if(service.isContinued);
+                    else {
+                        service.isPending=false;
+                        return;
+                    }
+                    service.isContinued=false;
+                }
                 var url =Base.url + "/users/" + userId + "/shots";
 
                 $http.get(url, {params: service.params}).then(function (success) {
