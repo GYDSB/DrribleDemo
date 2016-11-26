@@ -82,7 +82,7 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                             // console.log($scope.isPending);
                             $scope.nextPage = function () {
                                 ShotsService.getShots();
-                                $scope.isFinished = ShotsService.isFinished;
+                                $scope.isFinished=ShotsService.isFinished;
                             }
 
                             // like operation
@@ -108,11 +108,16 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                                 param[key]=value
                                 $state.go('shots',param,{reload:true});
                             }
-                            $scope.hasAttachments=function () {
-                                
+
+                            //loading more shots
+                            $scope.loadMoreShots=function () {
+                                ShotsService.isContinued=true;
+                                ShotsService.getShots();
+                                $scope.isFinished=ShotsService.isFinished;
+                                $scope.isContinued=ShotsService.isContinued;
                             }
 
-                            //筛选order打开方式
+
 
                             // // //移动端Touch事件监听
                             // $scope.touchStart=function ($event) {
@@ -160,6 +165,7 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                         function ($scope, $state, shot, comments, isLike, FormatService, LikedService) {
                             $scope.shot = shot.data;
                             $scope.comments = comments.data;
+                            // console.log(LikedService.likesList);
                             // console.log(isLike)
                             // $scope.likeFlag=true;
                             if (isLike.status == 200) {

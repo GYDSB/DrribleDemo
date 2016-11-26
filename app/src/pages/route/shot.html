@@ -101,7 +101,7 @@
             </div>
         </div>
 
-        <div class="shot-tags">
+        <div class="shot-tags" ng-hide="shot['tags'].length==0">
             <h3>Tags</h3>
             <div layout-wrap="" layout="row">
                 <span ng-repeat="tag in shot['tags']" layout-margin>

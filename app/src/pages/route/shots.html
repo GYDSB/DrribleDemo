@@ -21,7 +21,7 @@
     </div>
 </div>
 <div infinite-scroll="nextPage()"  infinite-scroll-distance='1'
-            infinite-scroll-disabled="isPending"
+            infinite-scroll-disabled="isPending" layout-margin
      layout="column">
     <md-grid-list md-cols="2" md-cols-xs="2" md-cols-sm="3"
                   md-cols-gt-sm="4" md-cols-md="5" md-cols-gt-md="5"
@@ -36,8 +36,12 @@
                     <span class="animate-mark" ng-show="shot['animated']">GIF</span>
                     <div class="shot-btn-group" hide show-gt-sm
                          layout="row" layout-align="end center">
-                        <a href="" ng-hide="shot['attachments_count']==0">
-                            <i class="material-icons"></i>
+                        <a href="" ng-hide="shot['attachments_count']==0" flex-offset="3" class="attach-file"
+                           layout="row" layout-align="space-between center">
+                            <i class="material-icons ">attach_file</i>
+                            <md-tooltip md-direction="top" md-autohide="true">
+                                This shot has attachment file
+                            </md-tooltip>
                         </a>
                         <a href="" layout="row" layout-align="space-between center">
                             <i class="material-icons" ng-click="toggleLike(shot)"
@@ -70,10 +74,13 @@
         </md-grid-tile>
     </md-grid-list>
 </div>
-
+<div layout="row" layout-align="center"
+     ng-show="isFinished" ng-click="loadMoreShots()">
+    <md-button>点击加载更多......</md-button>
+</div>
 <div layout="row" layout-sm="column" layout-align="space-around"
      style="margin-top: 16px;background-color: #f4f4f4"
-     ng-show="!isFinished" class="loading-bar">
+     ng-show="!isFinished||isContinued" class="loading-bar">
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
 

@@ -101,13 +101,21 @@ md-grid-list.user-shots-list{
     padding: 0px 4px;
     color: darkgray;
     font-size: 9px;
-
 }
 
 .shot-btn-group i{
-    font-size: 12px;
+    font-size: 14px;
     margin-right: 4px;
     outline: none;
+}
+.shot-btn-group a.attach-file{
+    position: absolute;
+    left: 0;
+    bottom: 5px;
+    transform: rotate(25deg);
+}
+.shot-btn-group a.attach-file:hover{
+    color:  #7bbb5e;
 }
 .user-shots{
     padding-top: 0;

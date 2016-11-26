@@ -213,6 +213,9 @@ md-icon.share-after{
     padding: 16px;
     border-bottom: 1px solid #ddd;
 }
+.shot-comment .comment-box:last-child{
+    border-bottom: none;
+}
 .shot-comment .comment-box div{
     margin-left: 16px;
 }

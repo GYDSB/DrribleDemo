@@ -20,9 +20,16 @@ angular.module("myApp")
                 "list":'shots'
             },
 
+            //缓冲状态
             isPending: false,
+            //点击加载状态
             isFinished:false,
+            isContinued:false,
+            //shots列举完毕
+            isEndOfShots:false,
+            
             shots: new Array(),
+            
             setParams: function (params) {
                 // console.log("init",params);
                 service.shots=[];
@@ -36,21 +43,33 @@ angular.module("myApp")
                 if (service.isPending)
                     return;
 
-                if (service.params["page"] > 8) {
-                    service.isFinished=true;
-                    return;
+                if (service.params["page"] > 4) {
+                    console.log("点击加载更多");
+                    if(service.isContinued);
+                    else {
+                        service.isPending=false;
+                        service.isFinished=true;
+                        return;
+                    }
+                    service.isContinued=false;
+                    // return;
                 }
                 service.isPending = true;
 
                 var url = Base.url + '/shots';
                 $http.get(url, {params: service.params}).then(function (success) {
                     var items = success.data;
-                    angular.forEach(items, function (item) {
-                        service.shots.push(item);
-                    })
-                    service.params['page'] += 1;
-                    service.isPending = false;
-                    // console.log(service.isPending);
+                    if(items.length==0){
+                        service.isEndOfShots=true;
+                        service.isPending = false;
+                    }
+                    else{
+                        angular.forEach(items, function (item) {
+                            service.shots.push(item);
+                        })
+                        service.params['page'] += 1;
+                        service.isPending = false;
+                    }
                 },function (error) {
 
                 });
@@ -82,6 +101,7 @@ angular.module("myApp")
             isPending: false,
             //is continuing loading shots
             isContinued:false,
+            isEndOfShots:false,
             shots:new Array(),
             //当前用户信息
             getMyself: function () {
@@ -98,7 +118,6 @@ angular.module("myApp")
                 //当page翻页至4时开始根据用户选择按需加载,每次加载一页
                 if(service.params['page']>4){
                     console.log("点击加载更多");
-                    // service.isPending=false;
                     if(service.isContinued);
                     else {
                         service.isPending=false;
