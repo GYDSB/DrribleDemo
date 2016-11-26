@@ -1,7 +1,5 @@
 <div layout="column" layout-gt-sm="row"
-     class="user-card" layout-align-gt-sm="center start"
-     infinite-scroll="nextPage()" infinite-scroll-distance='1'
-     infinite-scroll-disabled="isPending">
+     class="user-card" layout-align-gt-sm="center start">
     <div class="user-basic" flex-gt-sm="30" layout="column"
          layout-align="center none" layout-margin>
         <div>
@@ -62,7 +60,9 @@
         </div>
         <span class="mark-pro" ng-show="user['pro']">PRO</span>
     </div>
-    <div class="user-shots" flex-gt-sm="60" layout-margin layout="column">
+    <div class="user-shots" flex-gt-sm="60" layout-margin layout="column"
+         infinite-scroll="nextPage()" infinite-scroll-distance='1'
+         infinite-scroll-disabled="isPending">
         <div class="user-shots-header" layout="row" layout-align="center center">
             <a class="user-shots-header-tool" layout="row" href="">
                 <span>Shots</span>
@@ -106,9 +106,11 @@
         </md-grid-list>
         <div layout="row" layout-sm="column" layout-align="space-around"
              style="margin-top: 16px;background-color: #f4f4f4"
-             class="loading-bar">
+             class="loading-bar" ng-show="isPending">
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
         </div>
-        <div><md-button ng-click="loadMoreShots()">点我加载更多</md-button></div>
+        <div ng-hide="isPending" layout="row" layout-align="center center">
+            <md-button ng-click="loadMoreShots()">点我加载更多</md-button>
+        </div>
     </div>
 </div>

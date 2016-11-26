@@ -36,6 +36,9 @@
                     <span class="animate-mark" ng-show="shot['animated']">GIF</span>
                     <div class="shot-btn-group" hide show-gt-sm
                          layout="row" layout-align="end center">
+                        <a href="" ng-hide="shot['attachments_count']==0">
+                            <i class="material-icons"></i>
+                        </a>
                         <a href="" layout="row" layout-align="space-between center">
                             <i class="material-icons" ng-click="toggleLike(shot)"
                                ng-class="{'shot-like':isLikeShot(shot['id'])}">
@@ -43,11 +46,11 @@
                             </i>
                             <span>{{shot['likes_count']|number}}</span>
                         </a>
-                        <a href="" layout="row" layout-align="space-between center">
+                        <a href="" layout="row" layout-align="space-between center" ng-disabled="true">
                             <i class="material-icons">remove_red_eye</i>
                             <span>{{shot['views_count']|number}}</span>
                         </a>
-                        <a href="" layout="row" layout-align="space-between center">
+                        <a href="" layout="row" layout-align="space-between center" ng-disabled="true">
                             <i class="material-icons">
                                 comment
                             </i>

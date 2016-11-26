@@ -66,6 +66,10 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                                 list:"",
                                 timeframe:""
                             }
+                            $scope.shots = ShotsService.shots;
+                            //是否处于缓冲中
+                            $scope.isPending = ShotsService.isPending;
+
                             $scope.isRecent=function (key) {
                                 // console.log(key)
                                 if($stateParams['sort']=='recent'&&key=='timeframe'){
@@ -73,24 +77,6 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                                 }
                                 return false;
                             }
-                            // $scope.orderBy = function (index) {
-                            //     $scope.selectedIndex=index;
-                            //     console.log("order by"+$scope.requestObj[index].key);
-                            // }
-                            //
-                            // //index代表标记，item代表值
-                            // $scope.select=function (selectedIndex,item,index) {
-                            //     var key=$scope.requestObj[selectedIndex].key;
-                            //     //将值添加到数组开头
-                            //     $scope.requestObj[selectedIndex].value.splice(index,1);
-                            //     $scope.requestObj[selectedIndex].value.unshift(item);
-                            //     $scope.params[key]=item;
-                            //     console.log($scope.params)
-                            // }
-
-                            $scope.shots = ShotsService.shots;
-                            //是否处于缓冲中
-                            $scope.isPending = ShotsService.isPending;
 
 
                             // console.log($scope.isPending);
@@ -121,6 +107,9 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                                 var param={}
                                 param[key]=value
                                 $state.go('shots',param,{reload:true});
+                            }
+                            $scope.hasAttachments=function () {
+                                
                             }
 
                             //筛选order打开方式
