@@ -95,7 +95,7 @@ md-grid-list.user-shots-list{
     padding-top: 0;
 }
 .shot-btn-group{
-    margin-top: 4px;
+    margin-top: 8px;
 }
 .shot-btn-group a{
     padding: 0px 4px;
@@ -111,7 +111,7 @@ md-grid-list.user-shots-list{
 .shot-btn-group a.attach-file{
     position: absolute;
     left: 0;
-    bottom: 5px;
+    /*bottom: 5px;*/
     transform: rotate(-60deg);
 }
 .shot-btn-group a.attach-file:hover{

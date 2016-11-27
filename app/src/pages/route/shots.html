@@ -26,10 +26,10 @@
         <md-grid-tile ng-repeat="shot in shotsService.shots">
             <div>
                 <div layout="column" class="shot-teaser" style="">
-                    <div ng-click="goShot(shot.id)" class="shot-teaser-content" layout="column">
+                    <div  class="shot-teaser-content" layout="column">
                         <img ng-src="{{shot.images['teaser']}}" alt="shot"
                              src="images/loading.gif" >
-                        <div class="content-intro">
+                        <div class="content-intro" ng-click="goShot(shot.id)">
                             <h2>{{shot['title']}}</h2>
                             <em ng-bind-html="shot['description']"></em>
                         </div>
