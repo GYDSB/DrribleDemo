@@ -41,7 +41,7 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                             //list:animated,attachments,debuts,playoffs,rebounds,teams
                             //timeframe:week,month,year,ever
 
-
+                            $scope.shotsService=ShotsService;
                             // //参数数组
                             $scope.paramsArray=[
                                 {
@@ -66,9 +66,9 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                                 list:"",
                                 timeframe:""
                             }
-                            $scope.shots = ShotsService.shots;
+                            
                             //是否处于缓冲中
-                            $scope.isPending = ShotsService.isPending;
+                            // $scope.isPending = $scope.shotsService.isPending;
 
                             $scope.isRecent=function (key) {
                                 // console.log(key)
@@ -113,8 +113,6 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                             $scope.loadMoreShots=function () {
                                 ShotsService.isContinued=true;
                                 ShotsService.getShots();
-                                $scope.isFinished=ShotsService.isFinished;
-                                $scope.isContinued=ShotsService.isContinued;
                             }
 
 

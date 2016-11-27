@@ -43,7 +43,7 @@ angular.module("myApp")
                 if (service.isPending)
                     return;
 
-                if (service.params["page"] > 4) {
+                if (service.params["page"] > 8) {
                     console.log("点击加载更多");
                     if(service.isContinued);
                     else {

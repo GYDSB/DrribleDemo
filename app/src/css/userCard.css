@@ -112,7 +112,7 @@ md-grid-list.user-shots-list{
     position: absolute;
     left: 0;
     bottom: 5px;
-    transform: rotate(25deg);
+    transform: rotate(-60deg);
 }
 .shot-btn-group a.attach-file:hover{
     color:  #7bbb5e;

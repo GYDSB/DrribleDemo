@@ -1,19 +1,15 @@
-<!--<div class="sort-bar" layout="row" layout-align="center center">-->
-    <!--&lt;!&ndash;shot sort by&ndash;&gt;-->
-    <!--&lt;!&ndash;<a href="" ng-repeat="sortBy in requestObj" ng-click="orderBy($index)">&ndash;&gt;-->
-        <!--&lt;!&ndash;{{sortBy.value[0]}}&ndash;&gt;-->
-    <!--&lt;!&ndash;</a>&ndash;&gt;-->
-    <!--&lt;!&ndash;<ul class="sort-bar-list">&ndash;&gt;-->
-        <!--&lt;!&ndash;<li ng-repeat="item in requestObj[selectedIndex].value">&ndash;&gt;-->
-            <!--&lt;!&ndash;<a href="" ng-if="$index!=0" ng-click="select(selectedIndex,item,$index)">{{item}}</a>&ndash;&gt;-->
-        <!--&lt;!&ndash;</li>&ndash;&gt;-->
-    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-<!--</div>-->
+
 <div class="sort-bar" layout="row" layout-align="center center">
-    <div class="sort-bar-item" ng-repeat="param in paramsArray"
+    <div class="sort-bar-item " ng-repeat="param in paramsArray"
          layout="column">
-        <a href="" class="sort-param" layout-fill="" ng-hide="isRecent(param['key'])">{{param['top']}}</a>
-        <ul>
+        <div layout="row" layout-align="center center" class="sort-bar-item-title">
+            <a href="" class="sort-param" layout-fill="" ng-hide="isRecent(param['key'])">{{param['top']}}</a>
+            <span layout="row" layout-align="center center" class="arrow_down">
+                <i class="material-icons">keyboard_arrow_down</i>
+            </span>
+        </div>
+
+        <ul ng-class="{'adapter':true}">
             <li ng-repeat="value in param['values']">
                 <a href="" ng-click="resetParams(param['key'],value)">{{value}}</a>
             </li>
@@ -21,24 +17,30 @@
     </div>
 </div>
 <div infinite-scroll="nextPage()"  infinite-scroll-distance='1'
-            infinite-scroll-disabled="isPending" layout-margin
+            infinite-scroll-disabled="shotsService.isPending" layout-margin
      layout="column">
     <md-grid-list md-cols="2" md-cols-xs="2" md-cols-sm="3"
                   md-cols-gt-sm="4" md-cols-md="5" md-cols-gt-md="5"
                   md-gutter="12px" md-gutter-md="12px"
                   md-row-height="4:3" md-row-height-gt-sm="1:1" class="shots-list">
-        <md-grid-tile ng-repeat="shot in shots">
-            <div layout="column">
+        <md-grid-tile ng-repeat="shot in shotsService.shots">
+            <div>
                 <div layout="column" class="shot-teaser" style="">
-                    <img ng-src="{{shot.images['teaser']}}" alt="shot"
-                         src="images/loading.gif" ng-click="goShot(shot.id)">
+                    <div ng-click="goShot(shot.id)" class="shot-teaser-content" layout="column">
+                        <img ng-src="{{shot.images['teaser']}}" alt="shot"
+                             src="images/loading.gif" >
+                        <div class="content-intro">
+                            <h2>{{shot['title']}}</h2>
+                            <em ng-bind-html="shot['description']"></em>
+                        </div>
+                    </div>
                     <!--缓冲图片-->
                     <span class="animate-mark" ng-show="shot['animated']">GIF</span>
                     <div class="shot-btn-group" hide show-gt-sm
                          layout="row" layout-align="end center">
                         <a href="" ng-hide="shot['attachments_count']==0" flex-offset="3" class="attach-file"
                            layout="row" layout-align="space-between center">
-                            <i class="material-icons ">attach_file</i>
+                            <i class="material-icons ">attachment</i>
                             <md-tooltip md-direction="top" md-autohide="true">
                                 This shot has attachment file
                             </md-tooltip>
@@ -48,7 +50,11 @@
                                ng-class="{'shot-like':isLikeShot(shot['id'])}">
                                 favorite
                             </i>
+                            <md-tooltip md-direction="bottom" md-autohide="true">
+                                click click
+                            </md-tooltip>
                             <span>{{shot['likes_count']|number}}</span>
+
                         </a>
                         <a href="" layout="row" layout-align="space-between center" ng-disabled="true">
                             <i class="material-icons">remove_red_eye</i>
@@ -73,16 +79,20 @@
             </div>
         </md-grid-tile>
     </md-grid-list>
+    <div layout="row" layout-sm="column" layout-align="space-around"
+         style="margin-top: 16px;background-color: #f4f4f4"
+         ng-show="shotsService.isPending" class="loading-bar">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
 </div>
+
 <div layout="row" layout-align="center"
-     ng-show="isFinished" ng-click="loadMoreShots()">
+     ng-show="shotsService.isFinished&&!shotsService.isPending"
+     ng-if="!shotsService.isEndOfShots"
+     ng-click="loadMoreShots()">
     <md-button>点击加载更多......</md-button>
 </div>
-<div layout="row" layout-sm="column" layout-align="space-around"
-     style="margin-top: 16px;background-color: #f4f4f4"
-     ng-show="!isFinished||isContinued" class="loading-bar">
-    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-</div>
+
 
 
 

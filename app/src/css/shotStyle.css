@@ -8,8 +8,30 @@ md-grid-list.shots-list{
     width: 100%;
     border-radius: 3px;
 }
-.shots-list .shot-teaser >img{
+.shots-list .shot-teaser .shot-teaser-content{
+    position: relative;
+    outline: none;
+}
+.shots-list .shot-teaser .shot-teaser-content>img{
     width: 100%;
+}
+.shot-teaser-content:hover > .content-intro{
+    opacity: 1;
+    transition: opacity 0.25s ease;
+}
+.shot-teaser-content .content-intro{
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.88);
+    top: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    padding: 0px 15px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    z-index: 1;
+    overflow:hidden ;
+    opacity: 0;
 }
 .shots-list .shot-avatar{
     margin: 8px;
@@ -40,29 +62,41 @@ md-grid-list.shots-list{
 
 .shots-list span.animate-mark{
     position: absolute;
-    padding: 2px 4px;
-    margin: 8px 4px;
-    top:0;
+    padding: 1px 3px;
+    margin: 8px 0;
+    top: 0;
     border-radius: 4px;
-    background-color: darkgray;
+    background-color: rgba(169, 169, 169, 0.38);
     color: white;
-    font-weight: 500;
-    font-size: 8px;
+    font-weight: 700;
+}
+.shots-list span.animate-mark:hover{
+    background-color: rgba(1, 1, 1, 0.51);
 }
 
 .sort-bar{
-    padding: 8px;
-    /*position: relative;*/
+    position: relative;
     background-color: #eee;
+    border-bottom: 1px solid #e5e5e5;
 }
 .sort-bar a{
     color: darkgray;
     font-size: 14px;
-    padding: 0 8px;
+    /*padding: 0 8px;*/
     /*margin-right:12px;*/
+    margin: 8px 0;
+}
+.sort-bar .arrow_down i{
+    font-size: 12px;
 }
 .sort-bar .sort-bar-item{
-    position: relative;
+    /*position: relative;*/
+}
+.sort-bar .sort-bar-item-title{
+    margin-right: 12px;
+}
+.sort-bar .sort-bar-item:last-child .sort-bar-item-title{
+    margin-right: 0;
 }
 .sort-bar .sort-bar-item ul{
     position: absolute;
@@ -72,11 +106,17 @@ md-grid-list.shots-list{
     display: none;
     z-index: 4;
     background-color: #eee;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
+    box-shadow: 1px 2px 2px rgba(0,0,0,0.2);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+/*相对于sort-bar定位*/
+.sort-bar .sort-bar-item ul.adapter{
+    width: 100%;
+    left: 0;
 }
 .sort-bar-item ul li{
-    padding: 8px;
+    padding: 5px 15px;
 }
 .sort-bar-item ul li:hover{
     background-color: #bfbfbf;
