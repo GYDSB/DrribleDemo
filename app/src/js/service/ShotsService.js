@@ -56,7 +56,7 @@ angular.module("myApp")
                 }
                 service.isPending = true;
 
-                var url = Base.url + '/shots';
+                var url = Base.url + '/shots'+Base.suffix;
                 $http.get(url, {params: service.params}).then(function (success) {
                     var items = success.data;
                     if(items.length==0){
@@ -230,6 +230,10 @@ angular.module("myApp")
                 else {
                     return "1 minutes ago";
                 }
+            },
+            formatDescription:function (description) {
+                // console.log(typeof description);
+                return description;
             }
         }
     }])

@@ -31,8 +31,8 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                             ShotsService.setParams($stateParams);
                         }]
                     },
-                    controller: [ "$scope", "$state", "ShotsService","$stateParams","LikedService",
-                        function ($scope, $state,  ShotsService,$stateParams,LikedService) {
+                    controller: [ "$scope", "$state", "ShotsService","$stateParams","LikedService","FormatService",
+                        function ($scope, $state,  ShotsService,$stateParams,LikedService,FormatService) {
                             // var shots = ;
                             //初始数据获取page=1
 
@@ -42,6 +42,7 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                             //timeframe:week,month,year,ever
 
                             $scope.shotsService=ShotsService;
+                            // $scope.isPending=ShotsService.isPending;
                             // //参数数组
                             $scope.paramsArray=[
                                 {
@@ -77,7 +78,14 @@ angular.module("myApp", ["ngMaterial", "ui.router", "ngMessages",
                                 }
                                 return false;
                             }
-
+                            //格式化时间戳
+                            $scope.timestamp=function (past) {
+                                return FormatService.formatTime(past);
+                            }
+                            //格式化描述内容
+                            $scope.description=function (descript) {
+                                return FormatService.formatDescription(descript);
+                            }
 
                             // console.log($scope.isPending);
                             $scope.nextPage = function () {

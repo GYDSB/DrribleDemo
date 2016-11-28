@@ -29,10 +29,10 @@
                     <div  class="shot-teaser-content" layout="column">
                         <img ng-src="{{shot.images['teaser']}}" alt="shot"
                              src="images/loading.gif" >
-                        <div class="content-intro" ng-click="goShot(shot.id)">
-                            <h2>{{shot['title']}}</h2>
-                            <em ng-bind-html="shot['description']"></em>
-                        </div>
+                        <a class="content-intro" ng-click="goShot(shot.id)" layout="column">
+                            <strong>{{shot['title']}}</strong>
+                            <div ng-bind-html="description(shot['description'])" flex=""></div>
+                        </a>
                     </div>
                     <!--缓冲图片-->
                     <span class="animate-mark" ng-show="shot['animated']">GIF</span>

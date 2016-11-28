@@ -26,13 +26,42 @@ md-grid-list.shots-list{
     width: 100%;
     height: 100%;
     left: 0;
-    padding: 0px 15px;
-    border-radius: 3px;
+    padding:15px;
     box-sizing: border-box;
-    z-index: 1;
+    text-overflow: ellipsis;
     overflow:hidden ;
-    outline: none;
+    z-index: 1;
     opacity: 0;
+    color: #777777;
+}
+.shot-teaser-content .content-intro div{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+}
+.shot-teaser-content .content-intro a{
+    color: #777777;
+}
+.shot-teaser-content .content-intro p{
+    display: none;
+}
+.shot-teaser-content .content-intro p:first-child{
+    text-overflow: ellipsis;
+    overflow:hidden ;
+    font-size: 11px;
+    line-height: 1.4;
+    margin:0 0 10px 0;
+    display: block;
+}
+.shot-teaser-content .content-intro>strong{
+    margin: 0 25px 4px 0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.2;
+    color: #444;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .shots-list .shot-avatar{
     margin: 8px;
@@ -83,8 +112,6 @@ md-grid-list.shots-list{
 .sort-bar a{
     color: darkgray;
     font-size: 14px;
-    /*padding: 0 8px;*/
-    /*margin-right:12px;*/
     margin: 8px 0;
 }
 .sort-bar .arrow_down i{
